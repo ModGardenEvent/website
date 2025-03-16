@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Page Not Found">
+  <div class="mt-5 flex items-center justify-center">
+    <div
+      class="basis-2/3 rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white"
+    >
+      <h1
+        class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white"
+      >
+        404: Page not found
+      </h1>
+      <div
+        class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 text-center"
+      >
+        <div>The page you are looking for does not exist.</div>
+        <div>
+          <button
+            class="rounded bg-blue-500 px-4 py-2 font-bold text-black hover:bg-blue-700 dark:text-white"
+            id="returnbutton"
+          >
+            <span>Return to where you came from</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document
+    .getElementById("returnbutton")!
+    .addEventListener("click", function () {
+      window.history.back();
+    });
+</script>

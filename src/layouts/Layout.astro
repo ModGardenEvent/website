@@ -1,0 +1,81 @@
+---
+import NavBar from "../components/NavBar.astro";
+interface Props {
+  title: string;
+  page?: string;
+  description?: string;
+}
+
+let { title, page, description } = Astro.props;
+description = description ? description : "Mod Garden: A longer term mod creation event.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content={description}
+    
+    />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <script is:inline>
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+  <body
+    class="flex min-h-screen flex-col bg-pine-600 bg-flower-background bg-blend-screen dark:bg-soil-900 dark:bg-blend-multiply"
+  >
+    <main class="flex-grow">
+      <NavBar page={page} />
+      <slot />
+    </main>
+    <footer
+      class="flex items-center justify-center gap-4 bg-white py-4 text-sm text-black dark:bg-zinc-800 dark:text-white"
+    >
+      <a
+        href="https://github.com/ModGardenEvent/website"
+        class="hover:underline"
+        target="_blank"
+      >
+        <i class="fa-brands fa-github"></i>
+        Source Code
+      </a>
+      <a href="https://bsky.app/profile/modgarden.net" target="_blank">
+        <i class="fa-brands fa-bluesky"></i>
+      </a>
+      <a href="https://discord.modgarden.net" target="_blank">
+        <i class="fa-brands fa-discord"></i>
+      </a>
+    </footer>
+  </body>
+</html>
+<style is:global>
+  .fa-bluesky {
+    color: #0085ff;
+  }
+  .fa-discord {
+    color: #5865f2;
+  }
+  .fa-github {
+    color: #9921fe;
+  }
+</style>
+<script
+  is:inline
+  src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"
+></script>
+<script src="https://kit.fontawesome.com/e7ecb0423e.js" crossorigin="anonymous"
+></script>

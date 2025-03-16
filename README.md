@@ -1,2 +1,2 @@
 # website
- The website for Mod Garden.
+The website for Mod Garden.

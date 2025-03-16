@@ -1,0 +1,133 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import {
+  getEvents,
+  getUserAwards,
+  getUserData,
+  getUserProjects,
+  getUserSubmissions,
+} from "../../ts/ModGardenAPI";
+import type {
+  UserData,
+  ModGardenEvents,
+  Award,
+} from "../../ts/ModGardenAPI";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getModrinthUser } from "../../ts/ModrinthHelper";
+import AwardPlant from "../../components/AwardPlant.astro";
+
+const { user } = Astro.params;
+
+let userData = await getUserData(user);
+
+if (!userData || "error" in userData) {
+  Astro.response.status = 404;
+  Astro.response.statusText = "Event not found";
+}
+userData = userData as UserData;
+const projects = await getUserProjects(userData.id);
+const submissions = await getUserSubmissions(userData.id);
+const uniqueEvents = new Set();
+const events = await getEvents();
+for (const submission of submissions) {
+  uniqueEvents.add(submission.event);
+}
+const projectToEventsMap: Map<string, ModGardenEvents[]> = new Map();
+for (const submission of submissions) {
+  if (!projectToEventsMap.has(submission.project_id)) {
+    projectToEventsMap.set(submission.project_id, []);
+  }
+  projectToEventsMap
+    .get(submission.project_id)
+    ?.push(
+      events.find((event) => event.id === submission.event) as ModGardenEvents,
+    );
+}
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/flower/*.{jpeg,jpg,png,gif}",
+);
+const awards: Award[] = await getUserAwards(userData.id);
+
+const projectToAwardsMap: Map<string, Award[]> = new Map();
+for (const submission of submissions) {
+  if (!projectToAwardsMap.has(submission.project_id)) {
+    projectToAwardsMap.set(submission.project_id, []);
+  }
+  projectToAwardsMap
+    .get(submission.project_id)
+    ?.push(...awards.filter((award) => award.submission_id === submission.id));
+}
+
+// Useful for testing award plant layout stuff
+// for (let i = 0; i < 20; i++) {
+//     awards.push({
+//         award_id: "missing" + i,
+//         display_name: "Missing",
+//         sprite: "missing",
+//         tooltip: "This award is missing",
+//         awarded_to: userData.id,
+//         slug: "missing" + i,
+//         discord_emote: "",
+//         custom_data: ""
+//     });
+// }
+
+let modrinthUserIcon = "/images/unknown_user.png";
+if (userData.modrinth_id) {
+  var modrinthUser = await getModrinthUser(userData.modrinth_id);
+  if (modrinthUser) {
+    modrinthUserIcon = modrinthUser.avatar_url;
+  }
+}
+let bio =
+  projects.length > 0
+    ? `Worked on ${projects.length} projects across ${uniqueEvents.size} events earning ${awards.length} awards.`
+    : `Has earned ${awards.length} awards.`;
+---
+
+<Layout title={userData?.display_name}>
+  <div class="mx-auto mt-5 w-4/5">
+    <div
+      class="rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white"
+    >
+      <div class="flex border-0 border-b-4 border-leaf-200">
+        <span
+          class="mr-5 aspect-square w-16 bg-cover bg-center"
+          style={modrinthUserIcon
+            ? `background-image: url(${modrinthUserIcon});`
+            : ""}
+        >
+        </span>
+        <h1 class="mt-5 text-xl font-bold text-black dark:text-white">
+          {userData?.display_name}
+        </h1>
+      </div>
+      <div class="mt-3 text-center">
+        {bio}
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="mx-auto mt-5 min-h-24 w-4/5 rounded-lg border-4 border-gray-100 bg-repeat dark:border-zinc-700"
+    style="background-image: url('/images/soil.png');"
+  >
+    <div class="grid grid-cols-10 gap-2 p-4">
+      {awards.map((award) => <AwardPlant award={award} />)}
+    </div>
+  </div>
+  <div
+    class="mx-auto mt-3 grid w-4/5 grid-flow-row grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3"
+  >
+    {
+      projects.map((project) => (
+        <ProjectCard
+          submission={project}
+          events={projectToEventsMap.get(project.id)}
+          awards={projectToAwardsMap.get(project.id)}
+        />
+      ))
+    }
+  </div>
+</Layout>

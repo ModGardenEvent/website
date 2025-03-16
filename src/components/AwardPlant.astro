@@ -1,0 +1,56 @@
+---
+import { Award, AwardTier, getNiceTierName } from "../ts/ModGardenAPI";
+import missingFlower from "../assets/flower/missing.png";
+
+interface Props {
+  award: Award;
+}
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/flower/*.{jpeg,jpg,png,gif}",
+);
+const { award } = Astro.props;
+let imagePath = `/src/assets/flower/${award.sprite}.png`;
+let awardImage = images[imagePath];
+if (!awardImage) {
+  console.error(
+    `Flower for award ${award.display_name} not found: ${imagePath}`,
+  );
+  imagePath = missingFlower.src;
+}
+const toolTip = award.tooltip.replace("%custom_data%", award.custom_data);
+
+const tierToColor: Record<AwardTier, string> = {
+  COMMON: "text-gray-800 dark:text-gray-300",
+  UNCOMMON: "text-green-800 dark:text-green-300",
+  RARE: "text-blue-800 dark:text-blue-300",
+  LEGENDARY: "text-red-800 dark:text-red-300",
+};
+
+let textColor: any = {};
+textColor[tierToColor[award.tier]] = true;
+---
+
+<div>
+  <img
+    src={imagePath}
+    alt={award.display_name}
+    class="flower aspect-square w-20 hover:animate-bounce"
+    data-tooltip-target={award.award_id}
+  />
+  <div
+    id={award.award_id}
+    role="tooltip"
+    class="shadow-xs tooltip invisible absolute z-10 inline-block rounded-lg border-2 border-leaf-300 bg-gray-200 px-3 py-2 text-sm font-medium text-black opacity-0 transition-opacity duration-300 dark:border-leaf-200 dark:bg-zinc-800 dark:text-white"
+  >
+    <div class:list={["text-lg font-bold", textColor]}>
+      {award.display_name} - {getNiceTierName(award.tier)}
+    </div>
+    <div class="italic">{toolTip}</div>
+  </div>
+</div>
+
+<style>
+  .flower {
+    image-rendering: pixelated;
+  }
+</style>

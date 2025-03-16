@@ -1,0 +1,76 @@
+---
+import Layout from "../../layouts/Layout.astro";
+export const prerender = true;
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map(function (entry) {
+    return {
+      params: { post: entry.data.permalink },
+      props: entry,
+    };
+  });
+}
+type Props = CollectionEntry<"blog">;
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title} page="blog" description={post.data.description}>
+  <div class="flex min-h-screen w-full flex-col items-center justify-center">
+    <div class="mt-2 flex w-full max-w-4xl flex-col space-y-6 px-4">
+      <div
+        class="w-full rounded-lg border-0 border-b-4 border-leaf-200 bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white"
+      >
+        <h1
+          class="mb-4 text-center text-3xl font-bold text-black dark:text-white"
+        >
+          {post.data.title}
+        </h1>
+        <p class="text-md mb-2 text-center text-black dark:text-white">
+          {post.data.description}
+        </p>
+
+        <div
+          class="mt-2 flex items-center justify-center space-x-3 text-sm text-gray-500 dark:text-gray-400"
+        >
+          <img
+            src={post.data.author_avatar_url}
+            alt={post.data.author}
+            class="h-8 w-8 rounded-full"
+          />
+          <span>{post.data.author}</span>
+          <span>•</span>
+          <span>{post.data.date}</span>
+          {
+            post.data.edited_at && (
+              <>
+                <span>•</span>
+                <span>Edited: {post.data.edited_at}</span>
+              </>
+            )
+          }
+        </div>
+
+        {
+          post.data.tags && (
+            <div class="mt-4 flex flex-wrap justify-center gap-2">
+              {post.data.tags.map((tag) => (
+                <span class="rounded-full bg-leaf-200 px-3 py-1 text-xs font-semibold text-leaf-900 dark:bg-leaf-700 dark:text-leaf-100">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <div
+        class="prose w-full max-w-none rounded-lg bg-white p-6 shadow-md lg:prose-xl dark:prose-invert dark:bg-zinc-800"
+      >
+        <Content />
+      </div>
+    </div>
+  </div>
+</Layout>
