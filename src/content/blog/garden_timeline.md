@@ -1,6 +1,6 @@
 ---
 title: "Mod Garden - Garden Timeline"
-author: "Pug"
+author: "Calico"
 author_avatar_url: "https://cdn.modrinth.com/user/84zsGbft/ddfa5d3d49c0c2c4972542bd9a305c1d78f70ac1.png"
 date: "2025-01-26"
 description: "The rundown of a Mod Garden event timeline."
