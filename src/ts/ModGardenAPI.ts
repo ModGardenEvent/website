@@ -1,5 +1,5 @@
 //
-import { getMRProject, type Mod } from "./ModrinthHelper.ts";
+import { getModrinthProject, type Mod } from "./ModrinthHelper.ts";
 
 export type MinecraftAccount = {
   uuid: string;
@@ -159,5 +159,5 @@ export async function getUserAwards(user: string): Promise<Award[]> {
 export async function getModrinthModData(
   modrinth_id: string,
 ): Promise<Mod | undefined> {
-  return await getMRProject(modrinth_id);
+  return await getModrinthProject(modrinth_id);
 }

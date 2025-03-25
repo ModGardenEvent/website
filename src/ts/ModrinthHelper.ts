@@ -1,4 +1,5 @@
 import EleventyFetch from "@11ty/eleventy-fetch";
+import { LIB_VERSION } from "./Version";
 const MODRINTH_PROJECT_API = "https://api.modrinth.com/v2/project/";
 const MODRINTH_USER_API = "https://api.modrinth.com/v2/user/";
 export interface GalleryImage {
@@ -26,13 +27,13 @@ export interface File {
   filename: string;
 }
 
-export async function getMRProject(projectName: string): Promise<Mod> {
+export async function getModrinthProject(projectName: string): Promise<Mod> {
   let data = await EleventyFetch(`${MODRINTH_PROJECT_API}${projectName}`, {
     duration: "1h",
     type: "json",
     fetchOptions: {
       headers: {
-        "user-agent": "Github/ModGardenEvent/website",
+        "user-agent": `ModGardenEvent/website/${LIB_VERSION} (modgarden.net)`,
       },
     },
   });
@@ -44,7 +45,7 @@ export async function getModrinthUser(username: string): Promise<ModrinthUser> {
     type: "json",
     fetchOptions: {
       headers: {
-        "user-agent": "Github/ModGardenEvent/website",
+        "user-agent": `ModGardenEvent/website/${LIB_VERSION} (modgarden.net)`,
       },
     },
   });

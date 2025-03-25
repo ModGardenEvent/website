@@ -6,14 +6,14 @@
     "dev": "astro dev --api real",
     "dev_local": "astro dev --api local",
     "start": "astro dev --api real",
-    "build": "astro check && astro build",
+    "build": "node -p \"'export const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/ts/Version.ts && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/tailwind": "^5.1.2",
-    "astro": "^4.16.13",
+    "astro": "^4.16.18",
     "astro-icon": "^1.1.2",
     "flowbite": "^2.5.2",
     "tailwindcss": "^3.4.15",
