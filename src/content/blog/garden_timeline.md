@@ -19,11 +19,11 @@ Just as long as it's not something for the final mod, you're fine to make it.
 
 You may also use this phase to see what others are making.
 
-Registration is open for the first two weeks after a theme is announced, this seeps into the development phase.
+Registration is open during this phase and the development phase.
 
 ## The Development Phase
 
-**Timeframe: 42 days/6 weeks**
+**Timeframe: 56 days/8 weeks**
 
 The development phase is where participants will create their mods. Do whatever it takes within the timeframe.
 You are allowed to submit multiple.
@@ -36,7 +36,7 @@ If you can't get your mod reviewed by Modrinth in time, we will make exceptions 
 
 **Timeframe: 7 days/1 week**
 
-Have a break! This is also the time where those who asked for extensions will finish their mods.
+Take a break! This is also the time where those who asked for extensions will finish their mods.
 
 This also gives us time to make sure that everybody's mods are approved on Modrinth.
 
@@ -65,19 +65,21 @@ You are allowed to invite friends purely to help, or ask organisers to help duri
 
 When all of the previous preparations are wrapped up, the garden is opened up publicly, for everybody to explore.
 
-There is also voting, where you gain a special role for winning an award, as well as a special plant on your profile's garden on the Mod Garden website.
+There is also voting, where you gain a special role in the Discord for winning an award, as well as a special plant on your profile's garden on the Mod Garden website.
 
 The award categories are:
 
 - Thematic Award
   - For mods that fit the theme at play well.
 - Futureproof Award
-  - For mods that you could see yourself coming back to if you were to design a modpack.
+  - For mods that you could see yourself coming back to if you were to play the game or design a modpack.
 - Vision Award
-  - For mods that execute their design goals well.
-- Enjoyable Award
+  - For mods that execute their design goals well, whatever they may be.
+- Enjoyment Award
   - For mods that are just pure fun.
+- Team's Pick Award
+  - For mods selected by the team. Mods that didn't gain any other award will be prioritised for this category.
 
-Everybody gets a plant on their profile for participating.
+Every participant will gain a plant on their profile for participating.
 
 Do not think that plants are a competitive thing, most users will never be close to a 100% collection. At the end of the day, they are just profile flavour.
