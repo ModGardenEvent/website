@@ -22,12 +22,12 @@ const posts = await getCollection('blog');
             <div>
               <span>{blogPost.data.author}</span>
               <span>•</span>
-              <span>{blogPost.data.date}</span>
+              <span>{blogPost.data.date.toDateString()}</span>
               {
                 blogPost.data.edited_at && (
                   <>
                     <span>•</span>
-                    <span>Edited: {blogPost.data.edited_at}</span>
+                    <span>Edited: {blogPost.data.edited_at.toDateString()}</span>
                   </>
                 )
               }
