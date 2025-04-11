@@ -78,8 +78,8 @@ export function getNiceTierName(tier: AwardTier): string {
 const api_url =
   process.argv.includes("--api") &&
   process.argv[process.argv.indexOf("--api") + 1] === "local"
-    ? "http://localhost:7070/"
-    : "https://api.modgarden.net/";
+    ? "http://localhost:7070/v1/"
+    : "https://api.modgarden.net/v1/";
 
 export async function getUserData(
   username: string,
