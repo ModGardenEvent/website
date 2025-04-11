@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Image } from "astro:assets";
 import {
   getEvents,
   getUserAwards,
@@ -19,7 +18,7 @@ import AwardPlant from "../../components/AwardPlant.astro";
 
 const { user } = Astro.params;
 
-let userData = await getUserData(user);
+let userData = await getUserData(user!);
 
 if (!userData || "error" in userData) {
   Astro.response.status = 404;

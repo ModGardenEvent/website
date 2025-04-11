@@ -8,7 +8,7 @@ import type { ModGardenEvents, ResponseError } from "../../ts/ModGardenAPI";
 
 const { event } = Astro.params;
 
-let eventData: ModGardenEvents | ResponseError = await getEvent(event);
+let eventData: ModGardenEvents | ResponseError = await getEvent(event!);
 
 if (!eventData || "error" in eventData) {
   Astro.response.status = 404;
