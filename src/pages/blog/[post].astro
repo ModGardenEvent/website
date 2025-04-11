@@ -42,12 +42,12 @@ const { Content } = await render(post);
           />
           <span>{post.data.author}</span>
           <span>•</span>
-          <span>{post.data.date}</span>
+          <span>{post.data.date.toDateString()}</span>
           {
             post.data.edited_at && (
               <>
                 <span>•</span>
-                <span>Edited: {post.data.edited_at}</span>
+                <span>Edited: {post.data.edited_at.toDateString()}</span>
               </>
             )
           }

@@ -3,6 +3,7 @@ title: "Mod Garden - Garden Timeline"
 author: "Calico"
 author_avatar_url: "https://cdn.modrinth.com/user/84zsGbft/ddfa5d3d49c0c2c4972542bd9a305c1d78f70ac1.png"
 date: "2025-01-26"
+edited_at: "2025-04-11"
 description: "The rundown of a Mod Garden event timeline."
 tags:
   - meta
@@ -23,7 +24,7 @@ Registration is open during this phase and the development phase.
 
 ## The Development Phase
 
-**Timeframe: 56 days/8 weeks**
+**Timeframe: 60 days/8 weeks**
 
 The development phase is where participants will create their mods. Do whatever it takes within the timeframe.
 You are allowed to submit multiple.
