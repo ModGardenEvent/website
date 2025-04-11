@@ -1,5 +1,5 @@
 ---
-import { Award, AwardTier, getNiceTierName } from "../ts/ModGardenAPI";
+import { type Award, type AwardTier, getNiceTierName } from "../ts/ModGardenAPI";
 import missingFlower from "../assets/flower/missing.png";
 
 interface Props {
@@ -40,7 +40,7 @@ textColor[tierToColor[award.tier]] = true;
   <div
     id={award.award_id}
     role="tooltip"
-    class="shadow-xs tooltip invisible absolute z-10 inline-block rounded-lg border-2 border-leaf-300 bg-gray-200 px-3 py-2 text-sm font-medium text-black opacity-0 transition-opacity duration-300 dark:border-leaf-200 dark:bg-zinc-800 dark:text-white"
+    class="shadow-2xs tooltip invisible absolute z-10 inline-block rounded-lg border-2 border-leaf-300 bg-gray-200 px-3 py-2 text-sm font-medium text-black opacity-0 transition-opacity duration-300 dark:border-leaf-200 dark:bg-zinc-800 dark:text-white"
   >
     <div class:list={["text-lg font-bold", textColor]}>
       {award.display_name} - {getNiceTierName(award.tier)}

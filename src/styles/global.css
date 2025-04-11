@@ -1,1 +1,48 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/typography';
+@plugin 'flowbite/plugin';
+
+@source '../../node_modules/flowbite/**/*.js';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --background-image-flower-background: url('/images/background_tile.png');
+
+  --color-soil-50: #faf7ef;
+  --color-soil-100: #f5efee;
+  --color-soil-200: #ece0df;
+  --color-soil-300: #dcc8c5;
+  --color-soil-400: #c8a9a4;
+  --color-soil-500: #b18782;
+  --color-soil-600: #986866;
+  --color-soil-700: #805453;
+  --color-soil-800: #6b4646;
+  --color-soil-900: #5d3e40;
+  --color-soil-950: #321f20;
+
+  --color-leaf-50: #efffee;
+  --color-leaf-100: #d9ffd8;
+  --color-leaf-200: #a9ffa7;
+  --color-leaf-300: #7afd78;
+  --color-leaf-400: #37f236;
+  --color-leaf-500: #0ddb0c;
+  --color-leaf-600: #04b603;
+  --color-leaf-700: #078e07;
+  --color-leaf-800: #0b700b;
+  --color-leaf-900: #0c5b0e;
+  --color-leaf-950: #003302;
+
+  --color-pine-50: #ecfdf8;
+  --color-pine-100: #d0fbee;
+  --color-pine-200: #a5f5dc;
+  --color-pine-300: #6beac3;
+  --color-pine-400: #30d7a3;
+  --color-pine-500: #0bbe86;
+  --color-pine-600: #019265;
+  --color-pine-700: #017b55;
+  --color-pine-800: #046144;
+  --color-pine-900: #045038;
+  --color-pine-950: #012d1f;
+}

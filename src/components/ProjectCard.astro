@@ -37,16 +37,16 @@ const iconPicture = mod.icon_url ? mod.icon_url : undefined;
 ---
 
 <a
-  class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white hover:dark:bg-zinc-700"
+  class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
   href={`https://modrinth.com/project/${submission.modrinth_id}`}
   target="_blank"
 >
   <div
-    class="w-full rounded-t-lg bg-gray-200 p-2 group-hover:bg-gray-300 dark:bg-zinc-700 group-hover:dark:bg-zinc-600"
+    class="w-full rounded-t-lg bg-gray-200 p-2 group-hover:bg-gray-300 dark:bg-zinc-700 dark:group-hover:bg-zinc-600"
   >
     <div
       id="banner"
-      class="h-48 w-full rounded-t-lg bg-gray-300 bg-cover bg-center group-hover:bg-gray-400 dark:bg-zinc-800 group-hover:dark:bg-zinc-500"
+      class="h-48 w-full rounded-t-lg bg-gray-300 bg-cover bg-center group-hover:bg-gray-400 dark:bg-zinc-800 dark:group-hover:bg-zinc-500"
       style={galleryPicture
         ? `background-image: url(${galleryPicture.url});`
         : ""}
@@ -55,7 +55,7 @@ const iconPicture = mod.icon_url ? mod.icon_url : undefined;
   </div>
   <div class="flex items-start p-3">
     <span
-      class="mr-5 aspect-square w-24 rounded-lg border-4 border-gray-200 bg-gray-200 bg-cover bg-center group-hover:border-gray-300 group-hover:bg-gray-300 dark:border-zinc-700 dark:bg-zinc-700 dark:group-hover:border-zinc-600 group-hover:dark:bg-zinc-600"
+      class="mr-5 aspect-square w-24 rounded-lg border-4 border-gray-200 bg-gray-200 bg-cover bg-center group-hover:border-gray-300 group-hover:bg-gray-300 dark:border-zinc-700 dark:bg-zinc-700 dark:group-hover:border-zinc-600 dark:group-hover:bg-zinc-600"
       style={iconPicture ? `background-image: url(${iconPicture});` : ""}
     >
     </span>
