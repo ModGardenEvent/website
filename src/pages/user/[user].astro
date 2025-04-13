@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Image } from "astro:assets";
 import {
   getEvents,
   getUserAwards,
@@ -10,7 +9,7 @@ import {
 } from "../../ts/ModGardenAPI";
 import type {
   UserData,
-  ModGardenEvents,
+  ModGardenEvent,
   Award,
 } from "../../ts/ModGardenAPI";
 import ProjectCard from "../../components/ProjectCard.astro";
@@ -33,7 +32,7 @@ const events = await getEvents();
 for (const submission of submissions) {
   uniqueEvents.add(submission.event);
 }
-const projectToEventsMap: Map<string, ModGardenEvents[]> = new Map();
+const projectToEventsMap: Map<string, ModGardenEvent[]> = new Map();
 for (const submission of submissions) {
   if (!projectToEventsMap.has(submission.project_id)) {
     projectToEventsMap.set(submission.project_id, []);
@@ -41,7 +40,7 @@ for (const submission of submissions) {
   projectToEventsMap
     .get(submission.project_id)
     ?.push(
-      events.find((event) => event.id === submission.event) as ModGardenEvents,
+      events.find((event) => event.id === submission.event) as ModGardenEvent,
     );
 }
 const images = import.meta.glob<{ default: ImageMetadata }>(

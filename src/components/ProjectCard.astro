@@ -1,8 +1,7 @@
 ---
 import type {
   Award,
-  EventSubmission,
-  ModGardenEvents,
+  ModGardenEvent,
   Project,
 } from "../ts/ModGardenAPI";
 import type { Mod } from "../ts/ModrinthHelper";
@@ -11,7 +10,7 @@ import { getModrinthModData } from "../ts/ModGardenAPI";
 interface Props {
   submission: Project;
   awards?: Award[];
-  events?: ModGardenEvents[];
+  events?: ModGardenEvent[];
 }
 
 const { submission, events, awards } = Astro.props;

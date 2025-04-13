@@ -4,17 +4,17 @@ import {
   getEvent,
   getEventProjects,
 } from "../../ts/ModGardenAPI";
-import type { ModGardenEvents, ResponseError } from "../../ts/ModGardenAPI";
+import type { ModGardenEvent, ResponseError } from "../../ts/ModGardenAPI";
 
 const { event } = Astro.params;
 
-let eventData: ModGardenEvents | ResponseError = await getEvent(event!);
+let eventData: ModGardenEvent | ResponseError = await getEvent(event!);
 
 if (!eventData || "error" in eventData) {
   Astro.response.status = 404;
   Astro.response.statusText = "Event not found";
 }
-eventData = eventData as ModGardenEvents;
+eventData = eventData as ModGardenEvent;
 const projects = await getEventProjects(eventData.id);
 ---
 

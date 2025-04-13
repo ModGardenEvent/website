@@ -21,7 +21,7 @@ const events = await getEvents();
             <div class="border-0 border-b-4 border-leaf-200 text-lg font-semibold text-black dark:text-white">
               {modGardenEvent.display_name}
             </div>
-            <div class="italic">{modGardenEvent.description}</div>
+            <div class="italic">{modGardenEvent.description.split("\n")[0]}</div>
           </div>
         </a>
       ))

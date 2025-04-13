@@ -15,6 +15,8 @@ export type UserData = {
   id: string;
   username: string;
   display_name: string;
+  avatar_url?: string;
+  pronouns?: string;
   discord_id: string;
   modrinth_id?: string;
   created: number;
@@ -37,9 +39,10 @@ export type Project = {
   modrinth_id: string;
   attributed_to: string;
   authors: string[];
+  builders: string[];
 };
 
-export type ModGardenEvents = {
+export type ModGardenEvent = {
   id: string;
   slug: string;
   display_name: string;
@@ -47,7 +50,8 @@ export type ModGardenEvents = {
   minecraft_version: string;
   loader: string;
   loader_version: string;
-  started: number;
+  start_time: string;
+  end_time: string;
 };
 export type AwardTier = "COMMON" | "UNCOMMON" | "RARE" | "LEGENDARY";
 export type Award = {
@@ -93,18 +97,18 @@ export async function getUserData(
 
 export async function getEvent(
   slug: string,
-): Promise<ModGardenEvents | ResponseError> {
+): Promise<ModGardenEvent | ResponseError> {
   return await fetch(api_url + "event/" + slug)
     .then((response) => response.json())
     .then((data) =>
-      data.error ? (data as ResponseError) : (data as ModGardenEvents),
+      data.error ? (data as ResponseError) : (data as ModGardenEvent),
     );
 }
 
-export async function getEvents(): Promise<ModGardenEvents[]> {
+export async function getEvents(): Promise<ModGardenEvent[]> {
   return await fetch(api_url + "events")
     .then((response) => response.json())
-    .then((data) => data as ModGardenEvents[]);
+    .then((data) => data as ModGardenEvent[]);
 }
 
 export async function getSubmission(
