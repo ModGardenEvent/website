@@ -74,8 +74,8 @@ for (const submission of submissions) {
 
 let modrinthUserIcon = "/images/unknown_user.png";
 if (userData.modrinth_id) {
-  var modrinthUser = await getModrinthUser(userData.modrinth_id);
-  if (modrinthUser) {
+  const modrinthUser = await getModrinthUser(userData.modrinth_id);
+  if (modrinthUser && modrinthUser.avatar_url) {
     modrinthUserIcon = modrinthUser.avatar_url;
   }
 }
@@ -93,9 +93,7 @@ let bio =
       <div class="flex border-0 border-b-4 border-leaf-200">
         <span
           class="mr-5 aspect-square w-16 bg-cover bg-center"
-          style={modrinthUserIcon
-            ? `background-image: url(${modrinthUserIcon});`
-            : ""}
+          style=`background-image: url(${modrinthUserIcon});`
         >
         </span>
         <h1 class="mt-5 text-xl font-bold text-black dark:text-white">
