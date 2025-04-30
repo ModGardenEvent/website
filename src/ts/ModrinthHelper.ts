@@ -33,7 +33,7 @@ export async function getModrinthProject(projectName: string): Promise<Mod> {
     type: "json",
     fetchOptions: {
       headers: {
-        "user-agent": `ModGardenEvent/website/${LIB_VERSION} (modgarden.net)`,
+        "User-Agent": `ModGardenEvent/website/${LIB_VERSION} (modgarden.net)`,
       },
     },
   });
@@ -45,7 +45,7 @@ export async function getModrinthUser(username: string): Promise<ModrinthUser> {
     type: "json",
     fetchOptions: {
       headers: {
-        "user-agent": `ModGardenEvent/website/${LIB_VERSION} (modgarden.net)`,
+        "User-Agent": `ModGardenEvent/website/${LIB_VERSION} (modgarden.net)`,
       },
     },
   });
