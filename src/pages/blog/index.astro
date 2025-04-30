@@ -5,7 +5,7 @@ import Layout from "../../layouts/Layout.astro";
 const posts = await getCollection('blog');
 ---
 <Layout title="Mod Garden Blog" page="blog" description="Blog posts from Mod Garden">
-  <div class="mx-auto mt-3 grid w-3/4 grid-flow-row grid-cols-2 gap-2">
+  <div class="mx-auto mt-3 mb-3 grid w-3/4 grid-flow-row contents-col-2 gap-2">
     {
       posts.map((blogPost) => (
         <a

@@ -8,6 +8,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --animate-wiggle: wiggle 0.3s ease-in-out;
+  
   --background-image-flower-background: url('/images/background_tile.png');
 
   --color-soil-50: #faf7ef;
@@ -45,4 +47,23 @@
   --color-pine-800: #046144;
   --color-pine-900: #045038;
   --color-pine-950: #012d1f;
+
+  @keyframes wiggle {    
+    0%, 75% {
+      transform: rotate(0deg) scale(1.0);
+    }
+    25% {
+      transform: rotate(6deg) scale(1.2);
+    }
+    75% {
+      transform: rotate(-6deg) scale(1.0);
+    }
+  }
+}
+
+@utility contents-col-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  @media screen and (max-width: 800px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }

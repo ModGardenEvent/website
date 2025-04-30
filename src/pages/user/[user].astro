@@ -22,7 +22,7 @@ let userData = await getUserData(user!);
 
 if (!userData || "error" in userData) {
   Astro.response.status = 404;
-  Astro.response.statusText = "Event not found";
+  Astro.response.statusText = "User not found";
 }
 userData = userData as UserData;
 const projects = await getUserProjects(userData.id);
