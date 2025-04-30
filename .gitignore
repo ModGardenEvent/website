@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 .cache
 .vercel
+
+src/ts/Version.ts
