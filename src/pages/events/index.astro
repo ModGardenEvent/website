@@ -5,21 +5,22 @@ const events = await getEvents();
 ---
 
 <Layout title="Mod Garden Events" page="events">
-  <!-- Remove when we have events -->
-  <div class="mx-auto mt-3 w-3/4 rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white">
-    <h1 class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white">
-      Mod Garden Presents:
-    </h1>
-    <div class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 text-center">
-      <div class="text-lg font-semibold text-black dark:text-white">
-        Coming Soon, to a garden near you!
+    {events.length == 0 &&
+      <div class="mx-auto mt-3 w-3/4 rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white">
+        <h1 class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white">
+          Mod Garden Presents:
+        </h1>
+        <div class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 text-center">
+          <div class="text-lg font-semibold text-black dark:text-white">
+            Coming Soon, to a garden near you!
+          </div>
+          <div class="italic">Check back later for more information!</div>
+        </div>
       </div>
-      <div class="italic">Check back later for more information!</div>
-    </div>
-  </div>
+   }
   
   <div 
-    class="mx-auto mt-3 mb-3 grid w-3/4 grid-flow-row grid-cols-2 gap-2"
+    class="mx-auto mt-3 mb-3 grid w-3/4 grid-flow-row contents-col-2 gap-2"
   >
     {
       events.map((modGardenEvent) => (
