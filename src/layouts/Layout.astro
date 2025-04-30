@@ -1,5 +1,6 @@
 ---
 import NavBar from "../components/NavBar.astro";
+import { LIB_VERSION } from "../ts/Version";
 import "../styles/global.css"
 interface Props {
   title: string;
@@ -46,7 +47,10 @@ description = description ? description : "Mod Garden: A longer term mod creatio
     <footer
       class="ap-4 py-5 bg-white text-black dark:bg-zinc-800 dark:text-white"
     >
-      <div class="flex items-center justify-center text-lg mb-2 gap-2">
+      <p class="flex items-center justify-center text-center mb-1">
+        Mod Garden is not an official event, or affiliated with the Minecraft brand, Mojang or Microsoft.
+      </p>
+      <div class="flex items-center justify-center text-lg gap-2">
         <a
           href="https://github.com/ModGardenEvent/website"
           class="hover:underline"
@@ -62,8 +66,8 @@ description = description ? description : "Mod Garden: A longer term mod creatio
           <i class="fa-brands fa-discord"></i>
         </a>
       </div>
-      <p class="flex items-center justify-center text-center text-sm">
-        Mod Garden is not official, approved or associated with the Minecraft brand, Mojang or Microsoft.
+      <p class="flex items-center justify-center text-sm">
+        Mod Garden Website - v{LIB_VERSION}
       </p>
     </footer>
   </body>
