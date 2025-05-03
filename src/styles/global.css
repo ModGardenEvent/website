@@ -67,3 +67,13 @@
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
+
+@utility awards-col {
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+  @media screen and (max-width: 800px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

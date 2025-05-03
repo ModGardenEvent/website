@@ -86,7 +86,7 @@ let bio =
 ---
 
 <Layout title={userData?.display_name}>
-  <div class="mx-auto mt-5 w-4/5">
+  <div class="mx-auto mt-4 w-4/5">
     <div
       class="rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white"
     >
@@ -96,7 +96,7 @@ let bio =
           style=`background-image: url(${modrinthUserIcon});`
         >
         </span>
-        <h1 class="mt-5 text-xl font-bold text-black dark:text-white">
+        <h1 class="mt-4 text-xl font-bold text-black dark:text-white">
           {userData?.display_name}
         </h1>
       </div>
@@ -107,10 +107,10 @@ let bio =
   </div>
 
   <div
-    class="mx-auto mt-5 min-h-24 w-4/5 rounded-lg border-4 border-gray-100 bg-repeat dark:border-zinc-700"
+    class="mx-auto mt-4 min-h-24 w-4/5 rounded-lg border-4 border-gray-100 bg-repeat dark:border-zinc-700"
     style="background-image: url('/images/soil.png');"
   >
-    <div class="grid grid-cols-10 gap-2 p-4">
+    <div class="grid awards-col gap-2 p-4">
       {awards.map((award) => <AwardPlant award={award} />)}
     </div>
   </div>
