@@ -185,7 +185,7 @@ To leave a project, you may run `/project leave`.
 ## Booth Guidelines
 Booths are showcases for submissions. These are where players will interact with your mod.
 
-Please read the [Booth Claiming Guide](/blog/booth_claiming_guide) as that has pre-liminary information for before you build your booth. 
+Please read the [Booth Claiming Guide](/blog/booth-claiming-guide) as that has pre-liminary information for before you build your booth. 
 
 If you do not wish to build a booth, you may ask the team to build your booth or ask be left out of the showcase world.
 
