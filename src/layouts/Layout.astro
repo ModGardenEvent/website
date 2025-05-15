@@ -6,10 +6,12 @@ interface Props {
   title: string;
   page?: string;
   description?: string;
+  image?: string;
 }
 
-let { title, page, description } = Astro.props;
+let { title, page, description, image } = Astro.props;
 description = description ? description : "Mod Garden: A longer term mod creation event.";
+image = image ? image : "/favicon.png"
 ---
 
 <!doctype html>
@@ -22,7 +24,7 @@ description = description ? description : "Mod Garden: A longer term mod creatio
     
     />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href={image} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <script is:inline>
