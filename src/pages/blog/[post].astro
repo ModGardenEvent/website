@@ -17,7 +17,7 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={post.data.title} page="blog" description={post.data.description}>
+<Layout title={post.data.title} page="blog" description={post.data.description}, image={post.data.author_avatar_url}>
   <div class="flex min-h-screen w-full flex-col items-center justify-center">
     <div class="mt-2 mb-4 flex w-full max-w-4xl flex-col space-y-6 px-4">
       <div

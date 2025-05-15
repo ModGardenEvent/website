@@ -1,7 +1,7 @@
 ---
 title: "Mod Garden - Garden Timeline"
 author: "Calico"
-author_avatar_url: "https://cdn.modrinth.com/user/84zsGbft/ddfa5d3d49c0c2c4972542bd9a305c1d78f70ac1.png"
+author_avatar_url: "https://avatars.githubusercontent.com/u/81167232"
 date: "2025-01-26"
 edited_at: "2025-04-11"
 description: "The rundown of a Mod Garden event timeline."
@@ -29,9 +29,14 @@ Registration is open during this phase and the development phase.
 The development phase is where participants will create their mods. Do whatever it takes within the timeframe.
 You are allowed to submit multiple.
 
-You may ask for an up to 4 day extension if something goes wrong during this phase, you can't ask for an extension after this phase.
+You may ask for an up to a 1 week extension if something goes wrong during this phase, you can't ask for an extension after this phase.
 
 If you can't get your mod reviewed by Modrinth in time, we will make exceptions to the above rule.
+
+## Checkpoints
+Checkpoints are a system put in place to allow us and yourselves to check your own progress and to see if you are able to finish.
+
+Checkpoints will happen on the third week, and the sixth week. This will be time to check in on your own progress and see if you are able to finish your mod on time, to make sure that your mod will be complete by the end of the eigth week.
 
 ## The Extension/Break Phase
 
@@ -39,7 +44,7 @@ If you can't get your mod reviewed by Modrinth in time, we will make exceptions 
 
 Take a break! This is also the time where those who asked for extensions will finish their mods.
 
-This also gives us time to make sure that everybody's mods are approved on Modrinth.
+This also gives us time to make sure that everybody's mods are approved on Modrinth and to finish up any of our internals.
 
 ## The Tweak Phase
 
@@ -47,7 +52,14 @@ This also gives us time to make sure that everybody's mods are approved on Modri
 
 The tweak phase involves squashing out as many bugs as possible before the pack is live, but it's not just a bugtesting marathon! It's also a time where you can integrate into others' mods.
 
-You can also use this time to polish anything that already exists in your own mod, but, it is discouraged to do this, ideally, you should use the last week of dev time to do this.
+You can also use this time to polish anything that already exists in your own mod but it is discouraged to do this. You should use the last week of dev time to do this.
+
+A build server and test server will open up during this time, with the test server being used for testing mods, and the build server being opened up for time to spend claiming.
+
+### Claiming
+Claiming build space takes place within the weeks of the tweak phase. This is where you will claim space for your booth to be built within the building phase.
+
+Please read up on the [Booth Claiming Guidelines](/blog/booth-claiming-guidelines) for more information on this aspect of Mod Garden.
 
 ## The Building Phase
 

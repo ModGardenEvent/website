@@ -1,7 +1,7 @@
 {
   "name": "mod-garden-website",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "scripts": {
     "dev": "astro dev --api real",
     "dev_local": "astro dev --api local",
