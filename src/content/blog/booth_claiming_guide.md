@@ -1,13 +1,13 @@
 ---
-title: "Booth Claiming Guidelines"
+title: "Booth Claiming Guide"
 author: "Calico"
 author_avatar_url: "https://avatars.githubusercontent.com/u/81167232"
 date: "2025-05-15"
-edited_at: "2025-05-15"
+edited_at: "2025-05-16"
 description: "An explanation all about claiming your booth spaces before the building period."
 tags:
   - information
-permalink: "booth-claiming-guidelines"
+permalink: "booth-claiming-guide"
 ---
 
 ## What is a Booth Claim?

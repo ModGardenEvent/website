@@ -8,6 +8,7 @@ description: "The rundown of a Mod Garden event timeline."
 tags:
   - meta
   - information
+  - mod-garden
 permalink: "mod-garden-timeline"
 ---
 
@@ -54,12 +55,12 @@ The tweak phase involves squashing out as many bugs as possible before the pack 
 
 You can also use this time to polish anything that already exists in your own mod but it is discouraged to do this. You should use the last week of dev time to do this.
 
-A build server and test server will open up during this time, with the test server being used for testing mods, and the build server being opened up for time to spend claiming.
+A build server and test server will open up during this time, with the test server being used for testing mods, and the build server being opened up for time to spend claiming booth space.
 
 ### Claiming
-Claiming build space takes place within the weeks of the tweak phase. This is where you will claim space for your booth to be built within the building phase.
+Claiming booth space takes place within the weeks of the tweak phase. This is where you will claim space for your booth to be built within the building phase.
 
-Please read up on the [Booth Claiming Guidelines](/blog/booth-claiming-guidelines) for more information on this aspect of Mod Garden.
+Please read up on the [Booth Claiming Guidelines](/blog/booth-claiming-guide) for more information on this aspect of Mod Garden.
 
 ## The Building Phase
 
