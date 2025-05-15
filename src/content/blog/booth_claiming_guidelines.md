@@ -34,14 +34,14 @@ Booth claims must:
 
 ## Examples
 
-![Affectionate Booth Example](/images/affectionate_booth_example.png)
+![Affectionate Booth Example](/images/blog/affectionate_booth_example.png)
 A valid standard shape for claiming a booth (156 blocks/12.490m²).
 
-![Bovines and Buttercups Booth Example](/images/bovines_booth_example.png)
+![Bovines and Buttercups Booth Example](/images/blog/bovines_booth_example.png)
 A valid non-standard shape for claiming a booth (870 blocks/~29.496m²).
 
-![Evil Destroyer Booth Example](/images/evil_destroyer_booth_example.png)
+![Evil Destroyer Booth Example](/images/blog/evil_destroyer_booth_example.png)
 An invalid booth claim as it is too large (1682 blocks/41.011m²).
 
-![Missing Wilds Booth Example](/images/missing_wilds_booth_example.png)
+![Missing Wilds Booth Example](/images/blog/missing_wilds_booth_example.png)
 An invalid booth claim as it is too close to the ground. (Requires a minimum of around 40 blocks off the ground).

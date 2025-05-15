@@ -1,47 +1,29 @@
 ---
-import { getEvents } from "../../ts/ModGardenAPI";
 import Layout from "../../layouts/Layout.astro";
-// const events = await getEvents();
-const events = []
+import { Image } from "astro:assets";
+
+import natureLogo from "../../icons/events/nature/logo-full.png";
+
 ---
 
 <Layout title="Mod Garden Events" page="events">
-    {events.length == 0 &&
-      <div class="mx-auto mt-4 mb-4 w-3/4 rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white">
-        <h1 class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white">
+  <div
+   class="mx-auto mt-4 mb-4 grid w-3/4 grid-flow-row contents-col-2 gap-2"
+  >
+    <a
+      class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
+      href={`/events/mod-garden/nature`}
+    >
+      <div class="w-full bg-gray-200 p-3 pb-0 group-hover:bg-gray-300 dark:bg-zinc-700 dark:group-hover:bg-zinc-600">
+        <h1 class="mb-4 border-0 border-b-4 border-leaf-200 pb-2 text-xl font-bold text-black dark:text-white">
           Mod Garden Presents:
         </h1>
-        <div class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 text-center">
-          <div class="text-lg font-semibold text-black dark:text-white">
-            Coming Soon, to a garden near you!
-          </div>
-          <div class="italic">Check back later for more information!</div>
+      </div>
+      <div class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 p-3 text-center">
+        <div>
+          <Image src={natureLogo} alt="Mod Garden: Nature" class="mx-auto" />
         </div>
       </div>
-   }
-  
-  <!--<div -->
-  <!--  class="mx-auto mt-4 mb-4 grid w-3/4 grid-flow-row contents-col-2 gap-2"-->
-  <!--&gt;-->
-  <!--  {-->
-  <!--    events.map((modGardenEvent) => (-->
-  <!--      <a-->
-  <!--        class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"-->
-  <!--        href={`/events/${modGardenEvent.slug}`}-->
-  <!--      >-->
-  <!--        <div class="w-full bg-gray-200 p-3 pb-0 group-hover:bg-gray-300 dark:bg-zinc-700 dark:group-hover:bg-zinc-600">-->
-  <!--          <h1 class="mb-4 border-0 border-b-4 border-leaf-200 pb-2 text-xl font-bold text-black dark:text-white">-->
-  <!--            Mod Garden Presents:-->
-  <!--          </h1>-->
-  <!--        </div>-->
-  <!--        <div class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 p-3 text-center">-->
-  <!--          <div class="border-0 border-b-4 border-leaf-200 text-lg font-semibold text-black dark:text-white">-->
-  <!--            {modGardenEvent.display_name}-->
-  <!--          </div>-->
-  <!--          <div class="italic">{modGardenEvent.description.split("\n")[0]}</div>-->
-  <!--        </div>-->
-  <!--      </a>-->
-  <!--    ))-->
-  <!--  }-->
-  <!--</div>-->
+    </a>
+  </div>
 </Layout>

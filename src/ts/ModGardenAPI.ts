@@ -46,10 +46,9 @@ export type ModGardenEvent = {
   id: string;
   slug: string;
   display_name: string;
-  description: string;
   minecraft_version: string;
   loader: string;
-  loader_version: string;
+  registration_time: string;
   start_time: string;
   end_time: string;
 };

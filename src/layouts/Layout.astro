@@ -6,12 +6,16 @@ interface Props {
   title: string;
   page?: string;
   description?: string;
+  favicon?: string;
   image?: string;
+  color?: string;
 }
 
-let { title, page, description, image } = Astro.props;
+let { title, page, description, favicon, image, color } = Astro.props;
 description = description ? description : "Mod Garden: A Multi Month-Long Modding Event";
-image = image ? image : "/images/icon.png";
+favicon = favicon ? favicon : "/images/icon/generic.png";
+image = image ? image : "/images/icon/generic.png";
+color = color ? color : "#a9ffa7";
 ---
 
 <!doctype html>
@@ -22,9 +26,10 @@ image = image ? image : "/images/icon.png";
       name="description"
       content={description}
     />
-    <meta name="image" content={image})>
+    <meta name="og:image" content={image})>
+    <meta name="theme-color" content={color})>
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href={image} />
+    <link rel="icon" type="image/png" href={favicon} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <script is:inline>
