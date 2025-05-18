@@ -175,6 +175,8 @@ To leave a project, you may run `/project leave`.
 - Your Mod Garden account must be linked with your Modrinth account if you are a developer and your Minecraft account(s) if you are building.
 - Projects must be uploaded to Modrinth.
     - Unlisted projects are allowed, just make sure the project is on Modrinth.
+- Projects must be original.
+  - Assets used from other projects must be credited in the mod's description. This includes assets used by the same author.
 - Projects must be source visible.
     - This is so others besides yourself may take a look at any issues regarding your mod, and to make sure that there are no backdoors/other under the hood content within your mod.
 - Projects must be compatible with the event's Minecraft and Modloader (and API) version.
