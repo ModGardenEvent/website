@@ -155,7 +155,7 @@ Take things at your own pace and work within a scope you can handle, so you can 
 You may work either entirely solo or on a team, we will help facilitate people looking for a team to work with during planning phase and beyond.
 
 ## How to Participate?
-To participate, [join the Discord server](https://discord.modgarden.net) and run the `/register` and `/link modrinth` commands.
+To participate, [join the Discord server](https://discord.modgarden.net) and run the `/account create` and `/link modrinth` commands.
 
 When an event starts there will be an announcement in `#garden-announcements` from GardenBot. This message will have a button at the bottom, which will allow you to register.
 
