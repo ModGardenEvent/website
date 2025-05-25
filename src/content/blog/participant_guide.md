@@ -157,7 +157,7 @@ You may work either entirely solo or on a team. Teams can be predetermined befor
 Artists and musicians may additionally opt into the Artist Stall program, where they will get a small stall to tell people about what they have worked on. Where the artist stalls are located will depend on the Mod Garden's map. Please read any specific information about the Mod Garden to figure out where this area is.
 
 ## How to Participate?
-To participate, [join the Discord server](https://discord.modgarden.net) and run the `/register` and `/link modrinth` commands.
+To participate, [join the Discord server](https://discord.modgarden.net) and run the `/account create` and `/link modrinth` commands.
 
 When an event starts there will be an announcement in `#garden-announcements`. You may run the `/event register` command to give yourself access to the event participant role.
 
@@ -175,6 +175,8 @@ To leave a project, you may run `/project leave`.
 - Your Mod Garden account must be linked with your Modrinth account if you are a developer and your Minecraft account(s) if you are building.
 - Projects must be uploaded to Modrinth.
     - Unlisted projects are allowed, just make sure the project is on Modrinth.
+- Projects must be original.
+  - Assets used from other projects must be credited in the mod's description. This includes assets used by the same author.
 - Projects must be source visible.
     - This is so others besides yourself may take a look at any issues regarding your mod, and to make sure that there are no backdoors/other under the hood content within your mod.
 - Projects must be compatible with the event's Minecraft and Modloader (and API) version.
