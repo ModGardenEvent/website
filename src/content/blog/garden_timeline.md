@@ -3,7 +3,7 @@ title: "Mod Garden - Garden Timeline"
 author: "Calico"
 author_avatar_url: "https://avatars.githubusercontent.com/u/81167232"
 date: "2025-01-26"
-edited_at: "2025-04-11"
+edited_at: "2025-05-25"
 description: "The rundown of a Mod Garden event timeline."
 tags:
   - meta
@@ -58,9 +58,9 @@ You can also use this time to polish anything that already exists in your own mo
 A build server and test server will open up during this time, with the test server being used for testing mods, and the build server being opened up for time to spend claiming booth space.
 
 ### Claiming
-Claiming booth space takes place within the weeks of the tweak phase. This is where you will claim space for your booth to be built within the building phase.
+Claiming space takes place within the weeks of the tweak phase. This is where you will claim space for your booth, as well any paths and set dressing guides to be built within the building phase.
 
-Please read up on the [Booth Claiming Guidelines](/blog/booth-claiming-guide) for more information on this aspect of Mod Garden.
+Please read up on the [Claiming Guide](/blog/claiming-guide) for more information on this aspect of Mod Garden.
 
 ## The Building Phase
 

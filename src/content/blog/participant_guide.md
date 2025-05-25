@@ -3,7 +3,7 @@ title: "Mod Garden - Participant Guide"
 author: "Calico"
 author_avatar_url: "https://avatars.githubusercontent.com/u/81167232"
 date: "2025-05-16"
-edited_at: "2025-05-16"
+edited_at: "2025-05-25"
 description: "A guide for how to participate and important information for Mod Garden."
 tags:
   - meta
@@ -143,7 +143,7 @@ Mod Garden is a Minecraft Mod creation event where modders will create mods unde
 
 Mod Garden also has a showcase world for everyone to explore the new mods created after development has concluded.
 
-For more information on each stage of Mod Garden please read the [Garden Timeline](/blog/mod-garden-timeline).
+For more information on each stage of Mod Garden, please read the [Garden Timeline](/blog/mod-garden-timeline).
 
 ## Who can Participate?
 Anybody who can provide something towards a mod can participate.
@@ -152,14 +152,14 @@ Programmers, artists, musicians, new modders, veteran modders, skill is not a re
 
 Take things at your own pace and work within a scope you can handle, so you can work towards a finished mod. We're an anti-crunch environment here, so don't bite off more than you can chew.
 
-You may work either entirely solo or on a team, we will help facilitate people looking for a team to work with during planning phase and beyond.
+You may work either entirely solo or on a team. Teams can be predetermined before the Garden or you may find people to work with during Mod Garden, there is the #collaboration-requests channel for anybody who wishes to find people to collaborate with.
+
+Artists and musicians may additionally opt into the Artist Stall program, where they will get a small stall to tell people about what they have worked on. Where the artist stalls are located will depend on the Mod Garden's map. Please read any specific information about the Mod Garden to figure out where this area is.
 
 ## How to Participate?
 To participate, [join the Discord server](https://discord.modgarden.net) and run the `/register` and `/link modrinth` commands.
 
-When an event starts there will be an announcement in `#garden-announcements` from GardenBot. This message will have a button at the bottom, which will allow you to register.
-
-Alternatively you may run the `/event register` command.
+When an event starts there will be an announcement in `#garden-announcements`. You may run the `/event register` command to give yourself access to the event participant role.
 
 If you ever wish to drop out of the event whilst it is running, you may run the `/event unregister` command on the Discord bot.
 
@@ -180,12 +180,13 @@ To leave a project, you may run `/project leave`.
 - Projects must be compatible with the event's Minecraft and Modloader (and API) version.
   - For example, an event running on 1.21.1 Fabric means that to submit you'll need a version listed compatible with 1.21.1 and Fabric on Modrinth.
 - Projects must not violate others' copyright.
-- Projects are not allowed to use AI. This applies to both AI generated code and AI generated assets.
+- Projects are not allowed to be heavily reliant on LLMs and participants must make sure that they understand any underlying code that is written within their project if using any sort of AI.
+- Projects are not allowed to use AI for assets, please ask to collaborate if you need assets.
 
 ## Booth Guidelines
 Booths are showcases for submissions. These are where players will interact with your mod.
 
-Please read the [Booth Claiming Guide](/blog/booth-claiming-guide) as that has pre-liminary information for before you build your booth. 
+Please read the [Claiming Guide](/blog/claiming-guide) as that has pre-liminary information for before you build your booth. 
 
 If you do not wish to build a booth, you may ask the team to build your booth or ask be left out of the showcase world.
 
@@ -214,3 +215,21 @@ Other than this petal, you may have up to two bonus petals. These are rewarded f
     - If you wish to make a hidden easter egg, the reward/payoff should be something else.
 - Petals should not be intentionally time wasting. 
     - For example; Avoid mazes or long term goals such as using an item 1000 times.
+
+## How to help out Garden Development?
+
+DM a team member with what you wish to provide to the Garden, and we'll get in contact with you if we feel you can be trusted with such a task.
+You may ask to help after any announcement from Mod Garden
+
+If you are not on the team, you may still help with tasks during a Mod Garden.
+
+Pull Requests on GitHub are always welcome to any tooling that we utilize, as well as custom mods to help the showcase world really pop. Custom mods do not get booths unless they are entries themselves.
+
+You may also help with the pre-stage building or any assets for the showcase world. Please DM a team member with any information before the claiming phase, and you'll most likely be allowed in.
+
+### If you are to volunteer to help us...
+First of all, thank you so much! It means a lot to us.
+
+We may ask you do to specific things if you are up for it within what you offered us when signing up.
+
+You may also stop volunteering at any point if you wish, we will still appreciate what you have already done if so.
