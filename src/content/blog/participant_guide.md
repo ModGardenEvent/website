@@ -183,7 +183,7 @@ To leave a project, you may run `/project leave`.
   - For example, an event running on 1.21.1 Fabric means that to submit you'll need a version listed compatible with 1.21.1 and Fabric on Modrinth.
 - Projects must not violate others' copyright.
 - Projects are not allowed to be heavily reliant on LLMs and participants must make sure that they understand any underlying code that is written within their project if using any sort of AI.
-- Projects are not allowed to use AI for assets, please ask to collaborate if you need assets.
+- Projects are not allowed to use AI for assets within the mod and the modpage, please ask to collaborate if you need assets.
 
 ## Booth Guidelines
 Booths are showcases for submissions. These are where players will interact with your mod.
