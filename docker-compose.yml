@@ -1,0 +1,12 @@
+services:
+  website:
+    container_name: website
+    build: .
+    restart: unless-stopped
+    ports:
+      - 4321
+    networks:
+      - caddy_net
+networks:
+  caddy_net:
+    external: true
