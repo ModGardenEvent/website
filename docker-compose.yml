@@ -4,7 +4,7 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - 4321
+      - 4321:4321
     networks:
       - caddy_net
 networks:
