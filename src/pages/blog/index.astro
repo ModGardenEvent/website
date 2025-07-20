@@ -3,6 +3,11 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
 const posts = await getCollection('blog');
+posts.sort((a, b) => {
+  const dateA = a.data.edited_at || a.data.date;
+  const dateB = b.data.edited_at || b.data.date;
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 <Layout title="Mod Garden Blog" page="blog" description="Blog posts from Mod Garden">
   <div class="mx-auto mt-4 mb-4 grid w-3/4 grid-flow-row contents-col-2 gap-2">
