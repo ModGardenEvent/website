@@ -1,9 +1,14 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import ProjectCard from "../../../components/ProjectCard.astro";
 
 import natureLogo from "../../../icons/events/nature/logo-full.png";
+import type { Project } from "../../../ts/ModGardenAPI";
+import { getEventProjects } from "../../../ts/ModGardenAPI";
 
+
+const projects: Project[] = await getEventProjects("mod-garden-nature");
 ---
 
 <Layout title="Mod Garden: Nature" favicon="/images/icon/nature.png" image="/images/icon/nature.png" color="#68ae26">
@@ -151,8 +156,27 @@ import natureLogo from "../../../icons/events/nature/logo-full.png";
         </div>
       </div>
     </div>
+    <div
+      class="mx-auto mt-4 min-h-24 w-4/5 rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white">
+      <h1 class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white">
+        Submitted Projects
+      </h1>
+      <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => (
+          <ProjectCard
+            submission={project}
+            showUserInfo={true}
+          />
+        ))}
+        {projects.length === 0 && (
+          <div class="col-span-full text-center">
+            No projects submitted yet, you could be the first!
+          </div>
+        )
+        }
+      </div>
+    </div>
     <br>
-
   </div>
 </Layout>
 
