@@ -64,7 +64,7 @@ Dressing claims are claims for set dressing, this would be any thematic rebuildi
 
 These can be as large as you wish (within reason) and will typically stem from what would originally be a booth area.
 
-Dressing Claims are denoted using Glass Panes.
+Dressing Claims are denoted using Stained Glass.
 
 #### Dressing Claims must:
 - Make sure its obvious as to which booth claim(s) they originate from.
