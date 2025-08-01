@@ -9,6 +9,15 @@ import { getEventProjects } from "../../../ts/ModGardenAPI";
 
 
 const projects: Project[] = await getEventProjects("mod-garden-nature");
+
+const planningStart: Date = new Date("5/18/2025 0:00:00 AM UTC");
+const planningEnd: Date = new Date("5/25/2025 0:00:00 AM UTC");
+const developmentStart: Date = new Date("5/25/2025 0:00:00 AM UTC");
+const tweakStart: Date = new Date("8/22/2025 0:00:00 AM UTC");
+const buildStart: Date = new Date("9/5/2025 0:00:00 AM UTC");
+const buildEnd: Date = new Date("10/1/2025 0:00:00 AM UTC");
+const showcaseStart: Date = new Date("10/3/2025 0:00:00 AM UTC");
+const showcaseEnd: Date = new Date("10/10/2025 0:00:00 AM UTC");
 ---
 
 <Layout title="Mod Garden: Nature" favicon="/images/icon/nature.png" image="/images/icon/nature.png" color="#68ae26">
@@ -106,7 +115,7 @@ const projects: Project[] = await getEventProjects("mod-garden-nature");
           <ol class="relative border-s border-leaf-600 dark:border-leaf-200">
             <li class="mb-[19.5%] ms-4">
               <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
-              <time class="mb-1 text-sm font-normal leading-none italic">May 18th - May 25th</time>
+              <time datetime={planningStart.toISOString()} class="mb-1 text-sm font-normal leading-none italic">{planningStart.toDateString()} - {planningEnd.toDateString()}</time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Planning Stage</h3>
               <p class="text-base font-normal">
                 Here you can sign up, and start planning your project. This is the time to start forming teams, planning ideas and general brainstorming.
@@ -114,7 +123,7 @@ const projects: Project[] = await getEventProjects("mod-garden-nature");
             </li>
             <li class="mb-[19.5%] ms-4">
               <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
-              <time class="mb-1 text-sm font-normal leading-none italic">May 25th - August 22nd</time>
+              <time datetime={developmentStart.toISOString()} class="mb-1 text-sm font-normal leading-none italic">{developmentStart.toDateString()} - {tweakStart.toDateString()}</time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Development Stage</h3>
               <p class="text-base font-normal">
                 This is when you start working on your project(s). You should be submitted to Modrinth at the end of this stage.
@@ -122,7 +131,7 @@ const projects: Project[] = await getEventProjects("mod-garden-nature");
             </li>
             <li class="mb-[19.5%] ms-4">
               <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
-              <time class="mb-1 text-sm font-normal leading-none italic">August 23rd - 5th September</time>
+              <time datetime={tweakStart.toISOString()} class="mb-1 text-sm font-normal leading-none italic">{tweakStart.toDateString()} - {buildStart.toDateString()}</time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Tweak Stage</h3>
               <p class="text-base font-normal">
                 This period is all about fixing bugs, and integrating with other mods to have cross compatibility. Extensions will last until the end of the first week of this phase.
@@ -130,7 +139,7 @@ const projects: Project[] = await getEventProjects("mod-garden-nature");
             </li>
             <li class="mb-[19.5%] ms-4">
               <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
-              <time class="mb-1 text-sm font-normal leading-none italic">6th September - 1st October</time>
+              <time datetime={buildStart.toISOString()} class="mb-1 text-sm font-normal leading-none italic">{buildStart.toDateString()} - {buildEnd.toDateString()}</time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Building Stage</h3>
               <p class="text-base font-normal">
                 This stage is optional, but if you want to build a booth for your project, this is the time to do it.
@@ -138,7 +147,7 @@ const projects: Project[] = await getEventProjects("mod-garden-nature");
             </li>
             <li class="ms-4">
               <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
-              <time class="mb-1 text-sm font-normal leading-none italic">3rd October - 10th October</time>
+              <time datetime={showcaseStart.toISOString()} class="mb-1 text-sm font-normal leading-none italic">{showcaseStart.toDateString()} - {showcaseEnd.toDateString()}</time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Showcase Stage</h3>
               <p class="text-base font-normal">
                 This is when the event server is up and running, where you and players can visit booths for all the projects. Players may vote for mods and awards are given in this stage. The server will still be up for some time after this phase ends.
