@@ -1,9 +1,6 @@
 ---
-import type {
-  Award,
-  ModGardenEvent,
-  Project,
-} from "../ts/ModGardenAPI";
+import type { Award, ModGardenEvent, Project } from "../ts/ModGardenAPI";
+import { getUserData } from "../ts/ModGardenAPI";
 import type { Mod } from "../ts/ModrinthHelper";
 import { getModrinthModData } from "../ts/ModGardenAPI";
 
@@ -11,9 +8,10 @@ interface Props {
   submission: Project;
   awards?: Award[];
   events?: ModGardenEvent[];
+  showUserInfo?: boolean;
 }
 
-const { submission, events, awards } = Astro.props;
+const { submission, events, awards, showUserInfo } = Astro.props;
 
 const mod: Mod | undefined = await getModrinthModData(submission.modrinth_id);
 if (!mod) {
@@ -33,41 +31,52 @@ if (awards != undefined && awards.length > 0) {
 
 const galleryPicture = mod.gallery?.length ? mod.gallery[0] : undefined;
 const iconPicture = mod.icon_url ? mod.icon_url : undefined;
+const projectAuthors: string[] = [];
+if (showUserInfo) {
+  const users = submission.authors;
+  for (const userId of users) {
+    const userData = await getUserData(userId);
+    if (userData && "display_name" in userData) {
+      projectAuthors.push(userData.display_name);
+    }
+  }
+}
 ---
 
-<a
-  class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
-  href={`https://modrinth.com/project/${submission.modrinth_id}`}
-  target="_blank"
->
-  <div
-    class="w-full rounded-t-lg bg-gray-200 p-2 group-hover:bg-gray-300 dark:bg-zinc-700 dark:group-hover:bg-zinc-600"
-  >
-    <div
-      id="banner"
-      class="h-48 w-full rounded-t-lg bg-gray-300 bg-cover bg-center group-hover:bg-gray-400 dark:bg-zinc-800 dark:group-hover:bg-zinc-500"
+<div class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700">
+  <div class="w-full rounded-t-lg bg-gray-200 p-2 group-hover:bg-gray-300 dark:bg-zinc-700 dark:group-hover:bg-zinc-600">
+    <a id="banner"
+      class="block h-48 w-full rounded-t-lg bg-gray-300 bg-cover bg-center group-hover:bg-gray-400 dark:bg-zinc-800 dark:group-hover:bg-zinc-500"
       style={galleryPicture
         ? `background-image: url(${galleryPicture.url});`
         : ""}
-    >
-    </div>
+      href={`https://modrinth.com/project/${submission.modrinth_id}`}
+      target="_blank">
+    </a>
   </div>
   <div class="flex items-start p-3">
     <span
       class="mr-5 aspect-square w-24 rounded-lg border-4 border-gray-200 bg-gray-200 bg-cover bg-center group-hover:border-gray-300 group-hover:bg-gray-300 dark:border-zinc-700 dark:bg-zinc-700 dark:group-hover:border-zinc-600 dark:group-hover:bg-zinc-600"
-      style={iconPicture ? `background-image: url(${iconPicture});` : ""}
-    >
+      style={iconPicture ? `background-image: url(${iconPicture});` : ""}>
     </span>
     <div>
       <h1 class="pb-1 text-lg font-bold text-black dark:text-white">
         {mod.title}
       </h1>
+      {showUserInfo && (<div> By:
+        {projectAuthors.length > 0 
+          ? projectAuthors.map((author) => (
+            <a class="text-sm text-leaf-600 underline hover:text-leaf-800 dark:text-leaf-200 dark:hover:text-leaf-600" href={`/user/${author}`} target="_blank">
+              {author}</a>
+          )).reduce((prev, curr) => [prev, ", ", curr])
+          : "No authors listed" /* Here just in case somehow no authors, shouldn't be possible, but you can't be too safe */
+        }
+      </div>)}
       <span>
         {mod.description}
       </span>
     </div>
   </div>
-
   {
     events != undefined && events.length > 0 && (
       <div class="px-3 pb-3">
@@ -82,6 +91,6 @@ const iconPicture = mod.icon_url ? mod.icon_url : undefined;
       </div>
     )
   }
-</a>
+</div>
 
 <style></style>
