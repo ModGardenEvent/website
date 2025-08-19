@@ -27,7 +27,7 @@ export type UserData = {
 
 export type EventSubmission = {
   id: string;
-  project_id: string;
+  project: Project;
   event: string;
   modrinth_version_id: string;
   submitted: number;
@@ -140,9 +140,12 @@ export async function getUserSubmissions(
 }
 
 export async function getEventProjects(event: string): Promise<Project[]> {
-  return fetch(api_url + "event/" + event + "/projects")
+  return fetch(api_url + "event/" + event + "/submissions")
     .then((response) => response.json())
-    .then((data) => data as Project[]);
+    .then((data) => data as EventSubmission[])
+    .then((submissions) => 
+        submissions.map((submission) => submission.project),
+    );
 }
 
 export async function getEventSubmissions(
