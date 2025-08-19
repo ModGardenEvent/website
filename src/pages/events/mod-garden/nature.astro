@@ -10,6 +10,9 @@ import { getEventProjects } from "../../../ts/ModGardenAPI";
 
 
 const projects: Project[] = await getEventProjects("mod-garden-nature");
+projects.sort((a, b) => {
+    return a.slug.localeCompare(b.slug)
+});
 
 const planningStart = Moment("2025-05-18T00:00:00Z");
 const planningEnd = Moment("2025-05-25T00:00:00Z");
