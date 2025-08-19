@@ -1,5 +1,5 @@
 ---
-import type { Award, ModGardenEvent, Project } from "../ts/ModGardenAPI";
+import type { Award, ModGardenEvent, Project, UserData } from "../ts/ModGardenAPI";
 import { getUserData } from "../ts/ModGardenAPI";
 import type { Mod } from "../ts/ModrinthHelper";
 import { getModrinthModData } from "../ts/ModGardenAPI";
@@ -31,13 +31,13 @@ if (awards != undefined && awards.length > 0) {
 
 const galleryPicture = mod.gallery?.length ? mod.gallery[0] : undefined;
 const iconPicture = mod.icon_url ? mod.icon_url : undefined;
-const projectAuthors: string[] = [];
+const projectAuthors: UserData[] = [];
 if (showUserInfo) {
   const users = submission.authors;
   for (const userId of users) {
     const userData = await getUserData(userId);
-    if (userData && "display_name" in userData) {
-      projectAuthors.push(userData.display_name);
+    if (userData) {
+      projectAuthors.push(userData as UserData);
     }
   }
 }
@@ -66,8 +66,8 @@ if (showUserInfo) {
       {showUserInfo && (<div> By:
         {projectAuthors.length > 0 
           ? projectAuthors.map((author) => (
-            <a class="text-sm text-leaf-600 underline hover:text-leaf-800 dark:text-leaf-200 dark:hover:text-leaf-600" href={`/user/${author}`} target="_blank">
-              {author}</a>
+            <a class="text-sm text-leaf-600 underline hover:text-leaf-800 dark:text-leaf-200 dark:hover:text-leaf-600" href={`/user/${author.username}`} target="_blank">
+              {author.display_name}</a>
           )).reduce((prev, curr) => [prev, ", ", curr])
           : "No authors listed" /* Here just in case somehow no authors, shouldn't be possible, but you can't be too safe */
         }
