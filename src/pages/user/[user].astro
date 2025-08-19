@@ -29,6 +29,11 @@ const projects = await getUserProjects(userData.id);
 const submissions = await getUserSubmissions(userData.id);
 const uniqueEvents = new Set();
 const events = await getEvents();
+
+projects.sort((a, b) => {
+    return a.slug.localeCompare(b.slug)
+});
+
 for (const submission of submissions) {
   uniqueEvents.add(submission.event);
 }
@@ -47,6 +52,9 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/flower/*.{jpeg,jpg,png,gif}",
 );
 const awards: Award[] = await getUserAwards(userData.id);
+awards.sort((a, b) => {
+    return a.slug.localeCompare(b.slug)
+});
 
 const projectToAwardsMap: Map<string, Award[]> = new Map();
 for (const submission of submissions) {
