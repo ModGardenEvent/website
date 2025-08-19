@@ -34,11 +34,11 @@ for (const submission of submissions) {
 }
 const projectToEventsMap: Map<string, ModGardenEvent[]> = new Map();
 for (const submission of submissions) {
-  if (!projectToEventsMap.has(submission.project_id)) {
-    projectToEventsMap.set(submission.project_id, []);
+  if (!projectToEventsMap.has(submission.project.id)) {
+    projectToEventsMap.set(submission.project.id, []);
   }
   projectToEventsMap
-    .get(submission.project_id)
+    .get(submission.project.id)
     ?.push(
       events.find((event) => event.id === submission.event) as ModGardenEvent,
     );
@@ -50,11 +50,11 @@ const awards: Award[] = await getUserAwards(userData.id);
 
 const projectToAwardsMap: Map<string, Award[]> = new Map();
 for (const submission of submissions) {
-  if (!projectToAwardsMap.has(submission.project_id)) {
-    projectToAwardsMap.set(submission.project_id, []);
+  if (!projectToAwardsMap.has(submission.project.id)) {
+    projectToAwardsMap.set(submission.project.id, []);
   }
   projectToAwardsMap
-    .get(submission.project_id)
+    .get(submission.project.id)
     ?.push(...awards.filter((award) => award.submission_id === submission.id));
 }
 
