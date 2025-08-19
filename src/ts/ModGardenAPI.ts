@@ -1,4 +1,3 @@
-//
 import { getModrinthProject, type Mod } from "./ModrinthHelper.ts";
 
 export type MinecraftAccount = {
@@ -142,9 +141,22 @@ export async function getUserSubmissions(
 export async function getEventProjects(event: string): Promise<Project[]> {
   return fetch(api_url + "event/" + event + "/submissions")
     .then((response) => response.json())
+    .then((data) => {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      return data;
+    })
     .then((data) => data as EventSubmission[])
-    .then((submissions) => 
-        submissions.map((submission) => submission.project),
+    .then((submissions) => {
+        if (!Array.isArray(submissions)) {
+          throw new Error("Expected an array of submissions, something went wrong. instead got: " + typeof submissions);
+        }
+        if (submissions.length === 0) {
+          return [];
+        }
+        return submissions.map((submission) => submission.project);
+      }
     );
 }
 
