@@ -193,6 +193,8 @@ const showcaseEnd = Moment("2025-10-10T00:00:00Z");
     let timelineEntries = Array.from(document.querySelectorAll("[data-start-time]")).reverse();
     let currentTime = Moment();
     for (let entry of timelineEntries) {
+      if (!entry.parentElement)
+        return;
       const startTime = Moment(entry.getAttribute("data-start-time"));
       if (currentTime.isAfter(startTime)) {
         entry.parentElement.classList.add("current-timeline-entry");
