@@ -1,7 +1,6 @@
 FROM node:22-alpine AS runtime
+COPY . ./app
 WORKDIR /app
-
-COPY . .
 
 ENV HOST=0.0.0.0
 ENV PORT=4321
