@@ -6,16 +6,21 @@ import { getModrinthModData } from "../ts/ModGardenAPI";
 
 interface Props {
   submission: Project;
+  mod?: Mod;
   awards?: Award[];
   events?: ModGardenEvent[];
   showUserInfo?: boolean;
 }
 
-const { submission, events, awards, showUserInfo } = Astro.props;
+const { submission, mod, events, awards, showUserInfo } = Astro.props;
 
-const mod: Mod | undefined = await getModrinthModData(submission.modrinth_id);
-if (!mod) {
-  throw new Error("Modrinth data not found: " + submission.modrinth_id);
+var obtainedMod = mod;
+if (!obtainedMod) {
+  const lookup: Mod | undefined = await getModrinthModData(submission.modrinth_id);
+  if (!lookup) {
+    throw new Error("Modrinth data not found: " + submission.modrinth_id);
+  }
+  obtainedMod = lookup;
 }
 
 let eventNames = "";
@@ -29,8 +34,8 @@ if (awards != undefined && awards.length > 0) {
   awardNames = awards.map((award) => award.display_name).join(", ");
 }
 
-const galleryPicture = mod.gallery?.length ? mod.gallery[0] : undefined;
-const iconPicture = mod.icon_url ? mod.icon_url : undefined;
+const galleryPicture = obtainedMod.gallery?.length ? obtainedMod.gallery[0] : undefined;
+const iconPicture = obtainedMod.icon_url ? obtainedMod.icon_url : undefined;
 const projectAuthors: UserData[] = [];
 if (showUserInfo) {
   const users = submission.authors;
@@ -61,7 +66,7 @@ if (showUserInfo) {
     </span>
     <div>
       <h1 class="pb-1 text-lg font-bold text-black dark:text-white">
-        {mod.title}
+        {obtainedMod.title}
       </h1>
       {showUserInfo && (<div> By:
         {projectAuthors.length > 0 
@@ -73,7 +78,7 @@ if (showUserInfo) {
         }
       </div>)}
       <span>
-        {mod.description}
+        {obtainedMod.description}
       </span>
     </div>
   </div>
