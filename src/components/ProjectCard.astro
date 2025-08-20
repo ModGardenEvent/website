@@ -65,9 +65,11 @@ if (showUserInfo) {
       style={iconPicture ? `background-image: url(${iconPicture});` : ""}>
     </span>
     <div>
-      <h1 class="pb-1 text-lg font-bold text-black dark:text-white">
-        {obtainedMod.title}
-      </h1>
+      <h1 class="pb-1 text-lg font-bold text-black hover:text-gray-600 dark:text-white dark:hover:text-gray-300">
+        <a href=`https://modrinth.com/project/${submission.modrinth_id}`>
+          {obtainedMod.title}
+        </a>  
+    </h1>
       {showUserInfo && (<div> By:
         {projectAuthors.length > 0 
           ? projectAuthors.map((author) => (
