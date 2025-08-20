@@ -5,9 +5,9 @@ import ProjectCard from "../../../components/ProjectCard.astro";
 
 import natureLogo from "../../../icons/events/nature/logo-full.png";
 import type { Project } from "../../../ts/ModGardenAPI";
-import { getEventProjects } from "../../../ts/ModGardenAPI";
+import { getEventProjects, getModrinthModDataForEvent } from "../../../ts/ModGardenAPI";
 import { formatTime, isoTime } from "../../../ts/TimeHelper";
-import { getModrinthProject, type Mod } from "../../../ts/ModrinthHelper";
+import { type Mod } from "../../../ts/ModrinthHelper";
 
 type ProjectAndMod = {
     project: Project;
@@ -15,11 +15,12 @@ type ProjectAndMod = {
 }
 
 async function getProjects() : Promise<ProjectAndMod[]> {
+  const modrinthProjects = await getModrinthModDataForEvent("mod-garden-nature");
   const unsortedProjects = await getEventProjects("mod-garden-nature");
   const projects = new Array<ProjectAndMod>(unsortedProjects.length);
   for (let i = 0; i < unsortedProjects.length; ++i) {
     const project = unsortedProjects[i];
-    const mod = await getModrinthProject(project.modrinth_id);
+    const mod = modrinthProjects.find(mod => mod.id == project.modrinth_id);
     projects[i] = { project: project, mod: mod } as ProjectAndMod;
   }
   projects.sort((a, b) => a.mod.title.localeCompare(b.mod.title))

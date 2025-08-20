@@ -1,4 +1,4 @@
-import { getModrinthProject, type Mod } from "./ModrinthHelper.ts";
+import { getModrinthProject, getModrinthProjects, type Mod } from "./ModrinthHelper.ts";
 
 export type MinecraftAccount = {
   uuid: string;
@@ -174,8 +174,14 @@ export async function getUserAwards(user: string): Promise<Award[]> {
     .then((data) => data as Award[]);
 }
 
+
 export async function getModrinthModData(
   modrinth_id: string,
 ): Promise<Mod | undefined> {
   return await getModrinthProject(modrinth_id);
+}
+
+export async function getModrinthModDataForEvent(event: string): Promise<Mod[]> {
+    const projects = await getEventProjects(event);
+    return await getModrinthProjects(projects.map(project => project.modrinth_id));
 }
