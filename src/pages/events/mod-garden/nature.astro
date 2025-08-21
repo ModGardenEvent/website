@@ -225,4 +225,10 @@ const showcaseEnd = "2025-10-10T00:00:00Z";
   }
   highlightCurrentTimelineEntry();
   setInterval(highlightCurrentTimelineEntry, 1000 * 60);
+  let timelineEntries = Array.from(document.querySelectorAll("[data-start-time]"));
+  timelineEntries.forEach((entry) => {
+    const startTime = entry.getAttribute("data-start-time");
+    entry.setAttribute("datetime", Moment(startTime).toISOString());
+  });
+  
 </script>
