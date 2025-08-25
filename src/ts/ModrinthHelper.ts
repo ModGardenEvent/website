@@ -29,7 +29,7 @@ export interface File {
 }
 
 export async function getModrinthProject(projectName: string): Promise<Mod> {
-  let data = await EleventyFetch(`${MODRINTH_PROJECT_API}[${projectName}]`, {
+  let data = await EleventyFetch(`${MODRINTH_PROJECT_API}${projectName}`, {
     duration: "1h",
     type: "json",
     fetchOptions: {
