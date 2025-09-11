@@ -14,10 +14,20 @@ export default defineConfig({
   output: "server",
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins:
+    [
+      // @ts-ignore
+      tailwindcss()
+    ],
   },
 
   adapter: node({
     mode: "standalone"
   }),
+  
+  image: {
+    service: {
+      entrypoint: "src/services/image.ts"
+    }
+  }
 });

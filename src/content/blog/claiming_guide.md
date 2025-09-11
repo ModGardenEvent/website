@@ -73,16 +73,16 @@ Dressing Claims are denoted using Stained Glass.
 
 ### Valid Examples
 
-![Affectionate Booth Example](/images/blog/affectionate_booth_example.png)
+![Affectionate Booth Example](../../assets/blog/affectionate_booth_example.png)
 A valid, small standard shape for claiming a booth (156m²).
 
-![Bovines and Buttercups Booth Example](/images/blog/bovines_booth_example.png)
+![Bovines and Buttercups Booth Example](../../assets/blog/bovines_booth_example.png)
 A valid, medium, non-standard shape for claiming a booth (870m²).
 
-![Evil Destroyer Booth Example](/images/blog/evil_destroyer_booth_example.png)
+![Evil Destroyer Booth Example](../../assets/blog/evil_destroyer_booth_example.png)
 A valid, large, non-standard shape for claiming a booth (1682m²).
 
 ### Invalid Examples
 
-![Missing Wilds Booth Example](/images/blog/missing_wilds_booth_example.png)
+![Missing Wilds Booth Example](../../assets/blog/missing_wilds_booth_example.png)
 An invalid booth claim as it is too close to the ground. (Requires a minimum of around 40 blocks off the ground).

@@ -16,6 +16,9 @@ import ProjectCard from "../../components/ProjectCard.astro";
 import { getModrinthUser } from "../../ts/ModrinthHelper";
 import AwardPlant from "../../components/AwardPlant.astro";
 
+import unknownUserIcon from "../../assets/unknown_user.png";
+import soil from "../../assets/soil.png";
+
 const { user } = Astro.params;
 
 let userData = await getUserData(user!);
@@ -80,7 +83,7 @@ for (const submission of submissions) {
 //     });
 // }
 
-let modrinthUserIcon = "/images/unknown_user.png";
+let modrinthUserIcon = unknownUserIcon.src;
 if (userData.modrinth_id) {
   const modrinthUser = await getModrinthUser(userData.modrinth_id);
   if (modrinthUser && modrinthUser.avatar_url) {
@@ -116,7 +119,7 @@ let bio =
 
   <div
     class="mx-auto mt-4 min-h-24 w-4/5 rounded-lg border-4 border-gray-100 bg-repeat dark:border-zinc-700"
-    style="background-image: url('/images/soil.png');"
+    style=`background-image: url('${soil.src}');`
   >
     <div class="grid awards-col gap-2 p-4">
       {awards.map((award) => <AwardPlant award={award} />)}

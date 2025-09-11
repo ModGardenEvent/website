@@ -4,6 +4,8 @@ interface Props {
   page: string;
 }
 
+import genericIcon from "../assets/icon/generic.png";
+
 const { page } = Astro.props;
 ---
 
@@ -13,7 +15,7 @@ const { page } = Astro.props;
   >
     <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
       <div class="rounded-lg bg-white px-0.5 py-0.5">
-        <Image src="/images/icon/generic.png" width=32 height=32 alt="Mod Garden Icon", style="image-rendering: pixelated"/>
+        <Image src={genericIcon} width=32 height=32 alt="Mod Garden Icon", style="image-rendering: pixelated"/>
       </div>
       <span
         class="self-center whitespace-nowrap text-2xl font-semibold dark:text-leaf-200"

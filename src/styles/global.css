@@ -10,7 +10,7 @@
 @theme {
   --animate-wiggle: wiggle 0.3s ease-in-out;
   
-  --background-image-flower-background: url('/images/background_tile.png');
+  --background-image-flower-background: url('../assets/background_tile.png');
 
   --color-soil-50: #faf7ef;
   --color-soil-100: #f5efee;
