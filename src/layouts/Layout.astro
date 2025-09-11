@@ -11,10 +11,12 @@ interface Props {
   color?: string;
 }
 
+import genericIcon from "../assets/icon/generic.png";
+
 let { title, page, description, favicon, image, color } = Astro.props;
 description = description ? description : "Mod Garden: A Multi Month-Long Modding Event";
-favicon = favicon ? favicon : "../../assets/icon/generic.png";
-image = image ? image : "../../assets/icon/generic.png";
+favicon = favicon ? favicon : genericIcon.src;
+image = image ? image : genericIcon.src;
 color = color ? color : "#a9ffa7";
 ---
 
