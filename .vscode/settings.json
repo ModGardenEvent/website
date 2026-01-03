@@ -1,0 +1,23 @@
+{
+    "piny.project_settings": {
+        "open-pages": [
+            "pinyfakepage.html"
+        ],
+        "component-settings": {
+            "src/pages/toolbox.astro:::Temp": {
+                "route": "/toolbox"
+            }
+        },
+        "app-routes": {
+            "routes": [
+                "/",
+                "/404",
+                "/blog",
+                "/events",
+                "/events/mod-garden/nature",
+                "/toolbox"
+            ],
+            "current_route": "/toolbox"
+        }
+    }
+}
