@@ -1,5 +1,6 @@
 import EleventyFetch from "@11ty/eleventy-fetch";
-import { LIB_VERSION } from "./Version";
+// import { LIB_VERSION } from "./Version";
+const LIB_VERSION = "tiny-pineapple";
 const MODRINTH_PROJECT_API = "https://api.modrinth.com/v2/project/";
 const MODRINTH_PROJECTS_API = "https://api.modrinth.com/v2/projects?ids=";
 const MODRINTH_USER_API = "https://api.modrinth.com/v2/user/";
