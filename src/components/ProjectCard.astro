@@ -25,7 +25,7 @@ if (!obtainedMod) {
 
 let eventNames = "";
 if (events != undefined && events.length > 0) {
-  eventNames = events.map((event) => event.display_name).join(", ");
+  eventNames = events.map((event) => event.metadata.name ? event.metadata.name : event.slug).join(", ");
 }
 
 const galleryPicture = obtainedMod.gallery?.length ? obtainedMod.gallery[0] : undefined;
