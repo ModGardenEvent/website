@@ -16,4 +16,4 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sh ./update_website_entrypoint.sh
+            sh ./update_website.sh
