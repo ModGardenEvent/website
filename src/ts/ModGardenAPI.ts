@@ -39,6 +39,7 @@ export type UserData = {
   bio: {
     display_name?: string;
     pronouns?: string;
+    description?: string;
     avatar_url?: string;
   };
   integrations: {
