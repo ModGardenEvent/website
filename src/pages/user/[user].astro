@@ -2,15 +2,14 @@
 import Layout from "../../layouts/Layout.astro";
 import {
   getEvents,
-  getUserAwards,
   getUserData,
   getUserProjects,
   getUserSubmissions,
+  getSubmission,
 } from "../../ts/ModGardenAPI";
 import type {
   UserData,
   ModGardenEvent,
-  Award,
 } from "../../ts/ModGardenAPI";
 import ProjectCard from "../../components/ProjectCard.astro";
 import { getModrinthUser } from "../../ts/ModrinthHelper";
@@ -30,15 +29,20 @@ if (!userData || "error" in userData) {
 userData = userData as UserData;
 const projects = await getUserProjects(userData.id);
 const submissions = await getUserSubmissions(userData.id);
+const projectSubmissions = [];
 const uniqueEvents = new Set();
 const events = await getEvents();
 
+for (const project of projects) {
+  projectSubmissions.push(await getSubmission(project.submissions[0]));
+}
+
 projects.sort((a, b) => {
-    return a.slug.localeCompare(b.slug)
+    return a.id.localeCompare(b.id)
 });
 
 for (const submission of submissions) {
-  uniqueEvents.add(submission.event);
+  uniqueEvents.add(submission.event_id);
 }
 const projectToEventsMap: Map<string, ModGardenEvent[]> = new Map();
 for (const submission of submissions) {
@@ -48,55 +52,27 @@ for (const submission of submissions) {
   projectToEventsMap
     .get(submission.project.id)
     ?.push(
-      events.find((event) => event.id === submission.event) as ModGardenEvent,
+      events.find((event) => event.id === submission.event_id) as ModGardenEvent,
     );
 }
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/flower/*.{jpeg,jpg,png,gif}",
 );
-const awards: Award[] = await getUserAwards(userData.id);
-awards.sort((a, b) => {
-    return a.slug.localeCompare(b.slug)
-});
-
-const projectToAwardsMap: Map<string, Award[]> = new Map();
-for (const submission of submissions) {
-  if (!projectToAwardsMap.has(submission.project.id)) {
-    projectToAwardsMap.set(submission.project.id, []);
-  }
-  projectToAwardsMap
-    .get(submission.project.id)
-    ?.push(...awards.filter((award) => award.submission_id === submission.id));
-}
-
-// Useful for testing award plant layout stuff
-// for (let i = 0; i < 20; i++) {
-//     awards.push({
-//         award_id: "missing" + i,
-//         display_name: "Missing",
-//         sprite: "missing",
-//         tooltip: "This award is missing",
-//         awarded_to: userData.id,
-//         slug: "missing" + i,
-//         discord_emote: "",
-//         custom_data: ""
-//     });
-// }
 
 let modrinthUserIcon = unknownUserIcon.src;
-if (userData.modrinth_id) {
-  const modrinthUser = await getModrinthUser(userData.modrinth_id);
+if (userData.integrations.modrinth?.user_id) {
+  const modrinthUser = await getModrinthUser(userData.integrations.modrinth.user_id);
   if (modrinthUser && modrinthUser.avatar_url) {
     modrinthUserIcon = modrinthUser.avatar_url;
   }
 }
 let bio =
   projects.length > 0
-    ? `Worked on ${projects.length} projects across ${uniqueEvents.size} events earning ${awards.length} awards.`
-    : `Has earned ${awards.length} awards.`;
+    ? `Worked on ${projects.length} projects across ${uniqueEvents.size} events.` : `Worked on no projects.`;
+let displayName = userData.bio.display_name ? userData.bio.display_name : userData.username;
 ---
 
-<Layout title={userData?.display_name}>
+<Layout title={displayName}>
   <div class="mx-auto mt-4 w-4/5">
     <div
       class="rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white"
@@ -108,7 +84,7 @@ let bio =
         >
         </span>
         <h1 class="mt-4 text-xl font-bold text-black dark:text-white">
-          {userData?.display_name}
+          {displayName}
         </h1>
       </div>
       <div class="mt-3 text-center">
@@ -118,22 +94,14 @@ let bio =
   </div>
 
   <div
-    class="mx-auto mt-4 min-h-24 w-4/5 rounded-lg border-4 border-gray-100 bg-repeat dark:border-zinc-700"
-    style=`background-image: url('${soil.src}');`
-  >
-    <div class="grid awards-col gap-2 p-4">
-      {awards.map((award) => <AwardPlant award={award} />)}
-    </div>
-  </div>
-  <div
     class="mx-auto mt-3 grid w-4/5 grid-flow-row grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3"
   >
     {
-      projects.map((project) => (
+      projectSubmissions.map((submission) => (
         <ProjectCard
-          submission={project}
-          events={projectToEventsMap.get(project.id)}
-          awards={projectToAwardsMap.get(project.id)}
+          project={submission.project}
+          submission={submission}
+          events={projectToEventsMap.get(submission.project.id)}
         />
       ))
     }

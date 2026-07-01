@@ -4,31 +4,12 @@ import { Image } from "astro:assets";
 import ProjectCard from "../../../components/ProjectCard.astro";
 
 import natureLogo from "../../../icons/events/nature/logo-full.png";
-import type { Project } from "../../../ts/ModGardenAPI";
-import { getEventProjects, getModrinthModDataForEvent } from "../../../ts/ModGardenAPI";
-import { type Mod } from "../../../ts/ModrinthHelper";
+import type { SubmissionAndMod } from "../../../ts/ModGardenAPI";
+import { getSubmissions } from "../../../ts/ModGardenAPI";
 
 import natureIcon from "../../../assets/icon/nature.png";
 
-type ProjectAndMod = {
-    project: Project;
-    mod: Mod;
-}
-
-async function getProjects() : Promise<ProjectAndMod[]> {
-  const modrinthProjects = await getModrinthModDataForEvent("mod-garden-nature");
-  const unsortedProjects = await getEventProjects("mod-garden-nature");
-  const projects = new Array<ProjectAndMod>(unsortedProjects.length);
-  for (let i = 0; i < unsortedProjects.length; ++i) {
-    const project = unsortedProjects[i];
-    const mod = modrinthProjects.find(mod => mod.id == project.modrinth_id);
-    projects[i] = { project: project, mod: mod } as ProjectAndMod;
-  }
-  projects.sort((a, b) => a.mod.title.localeCompare(b.mod.title))
-  return projects;
-}
-
-const projects: ProjectAndMod[] = await getProjects();
+const submissions: SubmissionAndMod[] = await getSubmissions("mod-garden", "nature");
 
 const planningStart = "2025-05-18T00:00:00Z";
 const planningEnd = "2025-05-25T00:00:00Z";
@@ -188,14 +169,15 @@ const showcaseEnd = "2025-10-10T00:00:00Z";
         Submitted Projects
       </h1>
       <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
+        {submissions.map((submission) => (
           <ProjectCard
-            submission={project.project}
-            mod={project.mod}
+            project={submission.submission.project}
+            submission={submission.submission}
+            mod={submission.mod}
             showUserInfo={true}
           />
         ))}
-        {projects.length === 0 && (
+        {submissions.length === 0 && (
           <div class="col-span-full text-center">
             No projects submitted yet, you could be the first!
           </div>
