@@ -1,153 +1,212 @@
 import { getModrinthProject, getModrinthProjects, type Mod } from "./ModrinthHelper.ts";
 
-export type MinecraftAccount = {
-  uuid: string;
-  verified: boolean;
-};
-
-export type ResponseError = {
+export type ResponseErrorData = {
   error: string;
   description: string;
 };
 
+export class ResponseError extends Error {
+  constructor(data: ResponseErrorData) {
+    super(`HTTP '${data.error}': ${data.description}`)
+  }
+}
+
+export class EndpointError extends Error {
+  constructor(message: string) {
+    super(`HTTP Endpoint error: ${message}`)
+  }
+}
+
+function extractData<T>(data: any): T {
+  if (data.error && data.description) {
+    throw new ResponseError(data as ResponseErrorData);
+  }
+
+  return data as T
+}
+
+async function handleResponse<T>(response: Response): Promise<T> {
+  if (response.headers.has("Content-Type") && response.headers.get("Content-Type") === "text/plain") {
+    throw new EndpointError(await response.text());
+  } else {
+    return response.json();
+  }
+}
+
 export type UserData = {
   id: string;
   username: string;
-  display_name: string;
-  avatar_url?: string;
-  pronouns?: string;
-  discord_id: string;
-  modrinth_id?: string;
-  created: number;
+  bio: {
+    display_name?: string;
+    pronouns?: string;
+    avatar_url?: string;
+  };
+  integrations: {
+    discord?: {
+      user_id?: string;
+    }
+    modrinth?: {
+      user_id?: string;
+    }
+  };
+  created: string;
   projects: string[];
   events: string[];
-  minecraft_accounts?: String[];
+  roles: string[];
 };
 
 export type EventSubmission = {
   id: string;
   project: Project;
-  event: string;
-  modrinth_version_id: string;
-  submitted: number;
+  event_id: string;
+  platform: {
+    type: "modrinth";
+    project_id: string;
+    version_id: string;
+  } | {
+    type: "download_url";
+    download_url: string;
+  };
+  time_submitted: string;
 };
 
 export type Project = {
   id: string;
-  slug: string;
-  modrinth_id: string;
-  attributed_to: string;
-  authors: string[];
-  builders: string[];
+  metadata: {
+    type: string;
+    mod_id?: string;
+    name?: string;
+    description?: string;
+    source_url?: string;
+  };
+  team: { [user_id: string]: string };
+  permissions: { [user_id: string]: string };
+  submissions: string[];
 };
 
+export type ModGardenGenre = {
+  id: string;
+  slug: string;
+  metadata: {
+    name?: string;
+    description?: string;
+  };
+  events: string[];
+};
 export type ModGardenEvent = {
   id: string;
   slug: string;
   display_name: string;
-  minecraft_version: string;
-  loader: string;
-  registration_time: string;
-  start_time: string;
-  end_time: string;
+  platform: {
+    game: "minecraft";
+    game_version: string;
+    mod_loader: "fabric" | "cichlid";
+  };
+  roles: { [key: string]: string };
+  times: { [key: string]: string };
 };
-export type AwardTier = "COMMON" | "UNCOMMON" | "RARE" | "LEGENDARY";
-export type Award = {
-  award_id: string;
-  awarded_to: string;
-  custom_data: string;
-  slug: string;
-  display_name: string;
-  sprite: string;
-  discord_emote: string;
-  tooltip: string;
-  submission_id: string;
-  tier: AwardTier;
-};
-export function getNiceTierName(tier: AwardTier): string {
-  switch (tier) {
-    case "COMMON":
-      return "Common";
-    case "UNCOMMON":
-      return "Uncommon";
-    case "RARE":
-      return "Rare";
-    case "LEGENDARY":
-      return "Legendary";
+
+export type ByQuery = "id" | "slug" | "mod_id" | "username" | undefined;
+export type Query = [string, string];
+
+function query(...queries: (Query | undefined)[]): string {
+  let str = "";
+  for (const [key, value] of queries.filter((query) => query) as Query[]) {
+    str += (str.length === 0) ? "?" : "&";
+    str += `${key}=${value}`;
   }
+  return str;
+}
+
+function byQuery(by: ByQuery): Query | undefined {
+  return by ? ["by", by] : undefined;
 }
 
 const api_url =
   process.argv.includes("--api") &&
   process.argv[process.argv.indexOf("--api") + 1] === "local"
-    ? "http://localhost:7070/v1/"
-    : "https://api.modgarden.net/v1/";
+    ? "http://localhost:7070/v2/"
+    : "https://api.modgarden.net/v2/";
 
 export async function getUserData(
-  username: string,
-): Promise<UserData | ResponseError> {
-  return await fetch(api_url + "user/" + username)
-    .then((response) => response.json())
-    .then((data) =>
-      data.error ? (data as ResponseError) : (data as UserData),
-    );
+  id: string,
+  by: ByQuery = "username"
+): Promise<UserData> {
+  return fetch(api_url + "users/" + id + query(byQuery(by)))
+    .then((response) => handleResponse(response))
+    .then((data) => extractData(data));
+}
+
+export async function getGenres(): Promise<ModGardenGenre[]> {
+  return fetch(api_url + "genres")
+    .then((response) => handleResponse(response))
+    .then((data) => extractData(data));
 }
 
 export async function getEvent(
-  slug: string,
-): Promise<ModGardenEvent | ResponseError> {
-  return await fetch(api_url + "event/" + slug)
-    .then((response) => response.json())
-    .then((data) =>
-      data.error ? (data as ResponseError) : (data as ModGardenEvent),
-    );
+  genre_id: string,
+  event_id: string,
+  by: ByQuery = undefined
+): Promise<ModGardenEvent> {
+  return fetch(api_url + "events/" + genre_id + "/" + event_id + query(byQuery(by)))
+    .then((response) => handleResponse(response))
+    .then((data) => extractData(data));
 }
 
 export async function getEvents(): Promise<ModGardenEvent[]> {
-  return await fetch(api_url + "events")
-    .then((response) => response.json())
-    .then((data) => data as ModGardenEvent[]);
+  return getGenres()
+    .then((genres) => {
+      let eventsPromises: Promise<ModGardenEvent>[] = [];
+      // TODO: display events in different genres seperately
+      genres.forEach((genre) => {
+        genre.events.forEach((event_id) => {
+          eventsPromises.push(getEvent(genre.id, event_id, "id"))
+        });
+      });
+      return Promise.all(eventsPromises);
+    });
 }
 
 export async function getSubmission(
   id: string,
-): Promise<EventSubmission | ResponseError> {
-  return fetch(api_url + "submission/" + id)
-    .then((response) => response.json())
-    .then((data) =>
-      data.error ? (data as ResponseError) : (data as EventSubmission),
-    );
+  by: ByQuery = undefined,
+): Promise<EventSubmission> {
+  return fetch(api_url + "submissions/" + id + query(byQuery(by)))
+    .then((response) => handleResponse(response))
+    .then((data) => extractData(data));
 }
 
-export async function getProject(id: string): Promise<Project | ResponseError> {
-  return fetch(api_url + "project/" + id)
-    .then((response) => response.json())
-    .then((data) => (data.error ? (data as ResponseError) : (data as Project)));
+export async function getProject(id: string): Promise<Project> {
+  return fetch(api_url + "projects/" + id)
+    .then((response) => handleResponse(response))
+    .then((data) => extractData(data));
 }
 
 export async function getUserProjects(user: string): Promise<Project[]> {
-  return fetch(api_url + "user/" + user + "/projects")
-    .then((response) => response.json())
-    .then((data) => data as Project[]);
+  return fetch(api_url + "users/" + user)
+    .then((response) => handleResponse(response))
+    .then((data) => extractData<UserData>(data).projects)
+    .then((projects) => Promise.all(projects.map(getProject)));
 }
 export async function getUserSubmissions(
   user: string,
 ): Promise<EventSubmission[]> {
-  return fetch(api_url + "user/" + user + "/submissions")
-    .then((response) => response.json())
-    .then((data) => data as EventSubmission[]);
+  return getUserProjects(user)
+    .then((projects) => {
+      let submissionPromises: Promise<EventSubmission>[] = [];
+      projects.forEach((project) => {
+        if (project.metadata.type == "mod") {
+          submissionPromises.push(getSubmission(project.metadata.mod_id!, "mod_id"));
+        }
+      });
+      return Promise.all(submissionPromises);
+    });
 }
 
 export async function getEventProjects(event: string): Promise<Project[]> {
-  return fetch(api_url + "event/" + event + "/submissions")
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.error) {
-        throw new Error(data.error);
-      }
-      return data;
-    })
-    .then((data) => data as EventSubmission[])
+  return fetch(api_url + "events/" + event + "/submissions")
+    .then((response) => handleResponse(response))
+    .then((data) => extractData(data))
     .then((submissions) => {
         if (!Array.isArray(submissions)) {
           throw new Error("Expected an array of submissions, something went wrong. instead got: " + typeof submissions);
@@ -161,19 +220,14 @@ export async function getEventProjects(event: string): Promise<Project[]> {
 }
 
 export async function getEventSubmissions(
-  event: string,
+  genre_id: string,
+  event_id: string,
+  by: ByQuery = undefined
 ): Promise<EventSubmission[]> {
-  return fetch(api_url + "event/" + event + "/submissions")
-    .then((response) => response.json())
-    .then((data) => data as EventSubmission[]);
+  return fetch(api_url + "events/" + genre_id + "/" + event_id + "/submissions" + query(byQuery(by)))
+    .then((response) => handleResponse(response))
+    .then((data) => extractData(data));
 }
-
-export async function getUserAwards(user: string): Promise<Award[]> {
-  return fetch(api_url + "user/" + user + "/awards")
-    .then((response) => response.json())
-    .then((data) => data as Award[]);
-}
-
 
 export async function getModrinthModData(
   modrinth_id: string,
@@ -181,7 +235,27 @@ export async function getModrinthModData(
   return await getModrinthProject(modrinth_id);
 }
 
-export async function getModrinthModDataForEvent(event: string): Promise<Mod[]> {
-    const projects = await getEventProjects(event);
-    return await getModrinthProjects(projects.map(project => project.modrinth_id));
+export async function getModrinthModDataForEvent(genre_id: string, event_id: string, by: ByQuery = undefined): Promise<Mod[]> {
+    const platforms = (await getEventSubmissions(genre_id, event_id, by))
+      .map((value) => value.platform)
+      .filter((value) => value.type === "modrinth");
+    return await getModrinthProjects(platforms.map((submission) => submission.project_id));
+}
+
+export type SubmissionAndMod = {
+    submission: EventSubmission;
+    mod: Mod;
+}
+
+export async function getSubmissions(genre_id: string, event_id: string, by: ByQuery = undefined) : Promise<SubmissionAndMod[]> {
+  const modrinthProjects = await getModrinthModDataForEvent(genre_id, event_id, by);
+  const unsortedSubmissions = await getEventSubmissions(genre_id, event_id, by);
+  const submissions = new Array<SubmissionAndMod>(unsortedSubmissions.length);
+  for (let i = 0; i < unsortedSubmissions.length; ++i) {
+    const submission = unsortedSubmissions[i];
+    const mod = modrinthProjects.find(mod => mod.id === (submission.platform.type === "modrinth" ? submission.platform.project_id : undefined));
+    submissions[i] = { submission: submission, mod: mod } as SubmissionAndMod;
+  }
+  submissions.sort((a, b) => a.mod.title.localeCompare(b.mod.title))
+  return submissions;
 }

@@ -1,24 +1,24 @@
 ---
-import type { Award, ModGardenEvent, Project, UserData } from "../ts/ModGardenAPI";
+import type { EventSubmission, ModGardenEvent, Project, UserData } from "../ts/ModGardenAPI";
 import { getUserData } from "../ts/ModGardenAPI";
 import type { Mod } from "../ts/ModrinthHelper";
 import { getModrinthModData } from "../ts/ModGardenAPI";
 
 interface Props {
-  submission: Project;
+  project: Project;
+  submission: EventSubmission;
   mod?: Mod;
-  awards?: Award[];
   events?: ModGardenEvent[];
   showUserInfo?: boolean;
 }
 
-const { submission, mod, events, awards, showUserInfo } = Astro.props;
+const { project, submission, mod, events, showUserInfo } = Astro.props;
 
 var obtainedMod = mod;
 if (!obtainedMod) {
-  const lookup: Mod | undefined = await getModrinthModData(submission.modrinth_id);
+  const lookup: Mod | undefined = submission.platform.type === "modrinth" ? await getModrinthModData(submission.platform.project_id) : undefined;
   if (!lookup) {
-    throw new Error("Modrinth data not found: " + submission.modrinth_id);
+    throw new Error("Modrinth data not found for project of ID: '" + project.id + "'");
   }
   obtainedMod = lookup;
 }
@@ -28,22 +28,27 @@ if (events != undefined && events.length > 0) {
   eventNames = events.map((event) => event.display_name).join(", ");
 }
 
-let awardNames = "";
-if (awards != undefined && awards.length > 0) {
-  awardNames += "Won: ";
-  awardNames = awards.map((award) => award.display_name).join(", ");
-}
-
 const galleryPicture = obtainedMod.gallery?.length ? obtainedMod.gallery[0] : undefined;
 const iconPicture = obtainedMod.icon_url ? obtainedMod.icon_url : undefined;
 const projectAuthors: UserData[] = [];
 if (showUserInfo) {
-  const users = submission.authors;
-  for (const userId of users) {
-    const userData = await getUserData(userId);
+  const users = project.team;
+  for (const [id, _] of Object.entries(users)) {
+    const userData = await getUserData(id, "id");
     if (userData) {
       projectAuthors.push(userData as UserData);
     }
+  }
+}
+
+function getUrl(): string {
+  switch (submission.platform.type) {
+      case "modrinth":
+        return `https://modrinth.com/project/${submission.platform.project_id}`;
+      case "download_url":
+        return submission.platform.download_url;
+      default:
+        return `#`;
   }
 }
 ---
@@ -55,7 +60,7 @@ if (showUserInfo) {
       style={galleryPicture
         ? `background-image: url(${galleryPicture.url});`
         : ""}
-      href={`https://modrinth.com/project/${submission.modrinth_id}`}
+      href={getUrl()}
       target="_blank">
     </a>
   </div>
@@ -66,7 +71,7 @@ if (showUserInfo) {
     </span>
     <div>
       <h1 class="pb-1 text-lg font-bold text-black hover:text-gray-600 dark:text-white dark:hover:text-gray-300">
-        <a href=`https://modrinth.com/project/${submission.modrinth_id}`>
+        <a href={getUrl()}>
           {obtainedMod.title}
         </a>  
     </h1>
@@ -74,7 +79,7 @@ if (showUserInfo) {
         {projectAuthors.length > 0 
           ? projectAuthors.map((author) => (
             <a class="text-sm text-leaf-600 underline hover:text-leaf-800 dark:text-leaf-200 dark:hover:text-leaf-600" href={`/user/${author.username}`} target="_blank">
-              {author.display_name}</a>
+              {author.bio.display_name ? author.bio.display_name : author.username}</a>
           )).reduce((prev, curr) => [prev, ", ", curr])
           : "No authors listed" /* Here just in case somehow no authors, shouldn't be possible, but you can't be too safe */
         }
@@ -84,20 +89,6 @@ if (showUserInfo) {
       </span>
     </div>
   </div>
-  {
-    events != undefined && events.length > 0 && (
-      <div class="px-3 pb-3">
-        <span class="font-bold">Submitted to: </span>
-        {eventNames}
-        {awards != undefined && awards.length > 0 && (
-          <div>
-            <span class="font-bold">Won: </span>
-            {awardNames}
-          </div>
-        )}
-      </div>
-    )
-  }
 </div>
 
 <style></style>
