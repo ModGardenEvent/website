@@ -6,17 +6,18 @@ import {
   getUserProjects,
   getUserSubmissions,
   getSubmission,
+getEvent,
 } from "../../ts/ModGardenAPI";
 import type {
   UserData,
   ModGardenEvent,
+EventSubmission,
 } from "../../ts/ModGardenAPI";
 import ProjectCard from "../../components/ProjectCard.astro";
 import { getModrinthUser } from "../../ts/ModrinthHelper";
-import AwardPlant from "../../components/AwardPlant.astro";
 
 import unknownUserIcon from "../../assets/unknown_user.png";
-import soil from "../../assets/soil.png";
+import { partialRecord } from "astro:schema";
 
 const { user } = Astro.params;
 
@@ -29,12 +30,27 @@ if (!userData || "error" in userData) {
 userData = userData as UserData;
 const projects = await getUserProjects(userData.id);
 const submissions = await getUserSubmissions(userData.id);
-const projectSubmissions = [];
+const projectSubmissions: [ModGardenEvent, EventSubmission[]][] = [];
 const uniqueEvents = new Set();
 const events = await getEvents();
+const eventMap = new Map<string, ModGardenEvent>();
+const eventSubmissions = new Map<string, EventSubmission[]>();
+
+for (const event of events) {
+  eventMap.set(event.id, event);
+}
 
 for (const project of projects) {
-  projectSubmissions.push(await getSubmission(project.submissions[0]));
+  for (const submissionId of project.submissions) {
+    const submission = await getSubmission(submissionId);
+    eventSubmissions.getOrInsertComputed(submission.event_id, (_) => []).push(submission);
+  }
+}
+
+for (const event of events) {
+  if (eventSubmissions.has(event.id)) {
+    projectSubmissions.push([event, eventSubmissions.get(event.id)!]);
+  }
 }
 
 projects.sort((a, b) => {
@@ -70,6 +86,7 @@ let bio =
   projects.length > 0
     ? `Worked on ${projects.length} projects across ${uniqueEvents.size} events.` : `Worked on no projects.`;
 let displayName = userData.bio.display_name ? userData.bio.display_name : userData.username;
+let pronouns = userData.bio.pronouns;
 ---
 
 <Layout title={displayName}>
@@ -93,17 +110,22 @@ let displayName = userData.bio.display_name ? userData.bio.display_name : userDa
     </div>
   </div>
 
-  <div
-    class="mx-auto mt-3 grid w-4/5 grid-flow-row grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3"
-  >
-    {
-      projectSubmissions.map((submission) => (
-        <ProjectCard
-          project={submission.project}
-          submission={submission}
-          events={projectToEventsMap.get(submission.project.id)}
-        />
-      ))
-    }
-  </div>
+  {
+    projectSubmissions.map(([event, submissions]) => (
+      <h1 class={`text-2xl font-bold text-center center mx-auto w-fit pl-3 pr-3 rounded-lg pb-1 pt-1 mb-1 mt-4 bg-zinc-100 dark:bg-zinc-800 ${event.slug === "diy" ? "text-diy-600 dark:text-diy-200" : "text-leaf-600 dark:text-leaf-200"}`}><a href={`/events/mod-garden/${event.slug}`}>{event.metadata.name ? event.metadata.name : event.slug}</a></h1>
+      <div
+        class="mx-auto mt-3 grid w-4/5 grid-flow-row grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 pb-4 pt-1"
+      >
+        {
+          submissions.map((submission) => (
+            <ProjectCard
+              project={submission.project}
+              submission={submission}
+              events={projectToEventsMap.get(submission.project.id)}
+            />
+          ))
+        }
+      </div>
+    ))
+  }
 </Layout>

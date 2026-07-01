@@ -96,7 +96,9 @@ export type ModGardenGenre = {
 export type ModGardenEvent = {
   id: string;
   slug: string;
-  display_name: string;
+  metadata: {
+    name?: string;
+  };
   platform: {
     game: "minecraft";
     game_version: string;
@@ -163,6 +165,7 @@ export async function getEvents(): Promise<ModGardenEvent[]> {
           eventsPromises.push(getEvent(genre.id, event_id, "id"))
         });
       });
+      eventsPromises.reverse(); // sort by most recent
       return Promise.all(eventsPromises);
     });
 }
