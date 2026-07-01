@@ -36,6 +36,18 @@
   --color-leaf-900: #0c5b0e;
   --color-leaf-950: #003302;
 
+  --color-diy: #ffccff
+  --color-diy-100: #ff99ff;
+  --color-diy-200: #ff66ff;
+  --color-diy-300: #ff00ff;
+  --color-diy-400: #f000f0;
+  --color-diy-500: #e600e6;
+  --color-diy-600: #cc00cc;
+  --color-diy-700: #990099;
+  --color-diy-800: #800080;
+  --color-diy-900: #660066;
+  --color-diy-950: #4d004d;
+
   --color-pine-50: #ecfdf8;
   --color-pine-100: #d0fbee;
   --color-pine-200: #a5f5dc;

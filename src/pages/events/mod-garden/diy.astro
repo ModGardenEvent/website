@@ -3,7 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import ProjectCard from "../../../components/ProjectCard.astro";
 
-import eventLogo from "../../../icons/events/diy/logo-minimal.png";
+import eventLogo from "../../../icons/events/diy/logo-full.png";
 import type { ModGardenEvent, SubmissionAndMod } from "../../../ts/ModGardenAPI";
 import { getEvent, getSubmissions } from "../../../ts/ModGardenAPI";
 
@@ -36,11 +36,11 @@ showcaseEndMut.setDate(showcaseEndMut.getDate() + 7);
 const showcaseEnd = showcaseEndMut.toISOString();
 ---
 
-<Layout title="Mod Garden: DIY" favicon={eventIcon.src} image={eventIcon.src} color="#68ae26">
+<Layout title="Mod Garden: DIY" favicon={eventIcon.src} image={eventIcon.src} color="#fa00fa">
   <div class="mt-4 mb-4 flex flex-col items-center justify-center space-y-4">
     <div class="flex flex-col lg:flex-row lg:space-x-4 w-4/5">
       <div class="lg:basis-2/3 rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white items-center justify-center text-center">
-        <h1 class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white">
+        <h1 class="mb-4 border-0 border-b-4 border-diy-200 text-xl font-bold text-black dark:text-white">
           Mod Garden Presents:
         </h1>
         <div class="space-y-4 lg:mx-10">
@@ -57,18 +57,14 @@ const showcaseEnd = showcaseEndMut.toISOString();
           <p>
             As modders, you will be designing your ideas for a game drop in the form of a mod for Fabric 26.1.2. The rendering changes are in full swing now, come join the party!
           </p>
-          <p>
-            Although the real question is what nature will there be to preserve? That's where you come in! The
-            ecosystem of Yuukaflower Forest is yours to create and shape!
-          </p>
-          <h1 class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white ">
+          <h1 class="mb-4 border-0 border-b-4 border-diy-200 text-xl font-bold text-black dark:text-white ">
             Features
           </h1>
           <div class="px-12 text-left">
             <li>Take a look at mods created by modders across a two month timespan, made to fit the theme of DIY.</li>
-            <li>Explore a cozy map featuring the new Pale Garden biome, a large flowery area, and stay the night within the cabins.</li>
+            <li>This event's map is set atop a large jigsaw puzzle. Participants submissions should take up one or two pieces (scope dependent).</li>
           </div>
-          <h1 class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white ">
+          <h1 class="mb-4 border-0 border-b-4 border-diy-200 text-xl font-bold text-black dark:text-white ">
             Event Information
           </h1>
           <div class="overflow-x-auto">
@@ -126,13 +122,13 @@ const showcaseEnd = showcaseEndMut.toISOString();
         </div>
       </div>
       <div class="lg:basis-1/3 rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white max-lg:mt-2">
-        <h1 class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white">
+        <h1 class="mb-4 border-0 border-b-4 border-diy-200 text-xl font-bold text-black dark:text-white">
           Timeline
         </h1>
         <div class="mx-auto items-center justify-center space-y-4 text-center">
-          <ol class="relative border-s border-leaf-600 dark:border-leaf-200">
+          <ol class="relative border-s border-diy-600 dark:border-diy-200">
             <li class="mb-[19.5%] ms-4">
-              <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
+              <div class="absolute w-3 h-3 bg-diy-500 rounded-full mt-1.5 -start-1.5 dark:bg-diy-700"></div>
               <time datetime={phaseOneStart} data-start-time={phaseOneStart} data-end-time={phaseTwoStart}
                     class="mb-1 text-sm font-normal leading-none italic"> </time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Development - Phase 1</h3>
@@ -147,7 +143,7 @@ const showcaseEnd = showcaseEndMut.toISOString();
               </p>
             </li>
             <li class="mb-[19.5%] ms-4">
-              <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
+              <div class="absolute w-3 h-3 bg-diy-500 rounded-full mt-1.5 -start-1.5 dark:bg-diy-700"></div>
               <time datetime={phaseTwoStart} data-start-time={phaseTwoStart} data-end-time={phaseTwoEnd}
                     class="mb-1 text-sm font-normal leading-none italic"> </time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Development - Phase 2</h3>
@@ -156,7 +152,7 @@ const showcaseEnd = showcaseEndMut.toISOString();
               </p>
             </li>
             <li class="mb-[19.5%] ms-4">
-              <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
+              <div class="absolute w-3 h-3 bg-diy-500 rounded-full mt-1.5 -start-1.5 dark:bg-diy-700"></div>
               <time datetime={testStart} data-start-time={testStart} data-end-time={testEnd}
                     class="mb-1 text-sm font-normal leading-none italic"> </time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Test Period</h3>
@@ -165,7 +161,7 @@ const showcaseEnd = showcaseEndMut.toISOString();
               </p>
             </li>
             <li class="mb-[19.5%] ms-4">
-              <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
+              <div class="absolute w-3 h-3 bg-diy-500 rounded-full mt-1.5 -start-1.5 dark:bg-diy-700"></div>
               <time datetime={buildStart} data-start-time={buildStart} data-end-time={buildEnd}
                     class="mb-1 text-sm font-normal leading-none italic"> </time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Build Period</h3>
@@ -174,7 +170,7 @@ const showcaseEnd = showcaseEndMut.toISOString();
               </p>
             </li>
             <li class="ms-4">
-              <div class="absolute w-3 h-3 bg-pine-500 rounded-full mt-1.5 -start-1.5 dark:bg-pine-700"></div>
+              <div class="absolute w-3 h-3 bg-diy-500 rounded-full mt-1.5 -start-1.5 dark:bg-diy-700"></div>
               <time datetime={showcaseStart} data-start-time={showcaseStart} data-end-time={showcaseEnd}
                     class="mb-1 text-sm font-normal leading-none italic"></time>
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Showcase Period</h3>
@@ -188,7 +184,7 @@ const showcaseEnd = showcaseEndMut.toISOString();
     </div>
     <div
       class="mx-auto mt-4 min-h-24 w-4/5 rounded-lg bg-white p-6 text-black shadow-md dark:bg-zinc-800 dark:text-white">
-      <h1 class="mb-4 border-0 border-b-4 border-leaf-200 text-xl font-bold text-black dark:text-white">
+      <h1 class="mb-4 border-0 border-b-4 border-diy-200 text-xl font-bold text-black dark:text-white">
         Submitted Projects
       </h1>
       <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
@@ -214,7 +210,7 @@ const showcaseEnd = showcaseEndMut.toISOString();
 <style>
   @reference "../../../styles/global.css";
   .current-timeline-entry {
-      @apply bg-leaf-200/10 border-l-4 border-leaf-300 py-3
+      @apply bg-diy-200/10 border-l-4 border-diy-300 py-3
   }
 </style>
 <script>

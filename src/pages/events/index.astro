@@ -3,47 +3,41 @@ import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
 import natureLogo from "../../icons/events/nature/logo-full.png";
-import diyLogo from "../../icons/events/diy/logo-minimal.png";
+import diyLogo from "../../icons/events/diy/logo-full.png";
 
 ---
 
 <Layout title="Mod Garden Events" page="events">
-  <div
-   class="mx-auto mt-4 mb-4 grid w-3/4 grid-flow-row contents-col-2 gap-2"
-  >
-    <a
-      class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
-      href={`/events/mod-garden/nature`}
+  <div class="flex flex-col">
+    <div
+     class="mx-auto mt-4 mb-4 grid w-1/2 grid-flow-row gap-2 border-diy-600 dark:border-diy-200 border-5 rounded-xl"
     >
-      <div class="w-full bg-gray-200 p-3 pb-0 group-hover:bg-gray-300 dark:bg-zinc-700 dark:group-hover:bg-zinc-600">
-        <h1 class="mb-4 border-0 border-b-4 border-leaf-200 pb-2 text-xl font-bold text-black dark:text-white">
-          Mod Garden Presents:
-        </h1>
-      </div>
-      <div class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 p-3 text-center">
-        <div>
-          <Image src={natureLogo} alt="Mod Garden: Nature" class="mx-auto" />
+      <a
+        class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
+        href={`/events/mod-garden/diy`}
+        title="Mod Garden: DIY"
+      >
+        <div class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 p-3 text-center">
+          <div>
+            <Image src={diyLogo} alt="" class="mx-auto" />
+          </div>
         </div>
-      </div>
-    </a>
-  </div>
-  <div
-   class="mx-auto mt-4 mb-4 grid w-3/4 grid-flow-row contents-col-2 gap-2"
-  >
-    <a
-      class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
-      href={`/events/mod-garden/diy`}
+      </a>
+    </div>
+    <div
+     class="mx-auto mt-4 mb-4 grid w-1/2 grid-flow-row gap-2 border-leaf-600 dark:border-leaf-200 border-5 rounded-xl"
     >
-      <div class="w-full bg-gray-200 p-3 pb-0 group-hover:bg-gray-300 dark:bg-zinc-700 dark:group-hover:bg-zinc-600">
-        <h1 class="mb-4 border-0 border-b-4 border-leaf-200 pb-2 text-xl font-bold text-black dark:text-white">
-          Mod Garden Presents:
-        </h1>
-      </div>
-      <div class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 p-3 text-center">
-        <div>
-          <Image src={diyLogo} alt="Mod Garden: DIY" class="mx-auto" />
+      <a
+        class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
+        href={`/events/mod-garden/nature`}
+        title="Mod Garden: Nature"
+      >
+        <div class="mx-auto flex w-2/3 flex-col items-center justify-center space-y-4 p-3 text-center">
+          <div>
+            <Image src={natureLogo} alt="" class="mx-auto" />
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </Layout>
