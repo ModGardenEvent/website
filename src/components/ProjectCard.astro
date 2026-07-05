@@ -18,10 +18,11 @@ const { project, submission, mod, events, showUserInfo, name } = Astro.props;
 var obtainedMod = mod;
 if (!obtainedMod) {
   const lookup: Mod | undefined = submission.platform.type === "modrinth" ? await getModrinthModData(submission.platform.project_id) : undefined;
-  if (!lookup) {
+  if (!lookup && submission.platform.type === "modrinth") {
     throw new Error("Modrinth data not found for project of ID: '" + project.id + "'");
+  } else {
+    obtainedMod = lookup;
   }
-  obtainedMod = lookup;
 }
 
 let eventNames = "";
@@ -29,8 +30,8 @@ if (events != undefined && events.length > 0) {
   eventNames = events.map((event) => event.metadata.name ? event.metadata.name : event.slug).join(", ");
 }
 
-const galleryPicture = obtainedMod.gallery?.length ? obtainedMod.gallery[0] : undefined;
-const iconPicture = obtainedMod.icon_url ? obtainedMod.icon_url : undefined;
+const galleryPicture = obtainedMod ? (obtainedMod.gallery?.length ? obtainedMod.gallery[0] : undefined) : undefined;
+const iconPicture = obtainedMod ? (obtainedMod.icon_url ? obtainedMod.icon_url : undefined) : undefined;
 const projectAuthors: UserData[] = [];
 if (showUserInfo) {
   const users = project.team;
@@ -53,8 +54,7 @@ function getUrl(): string {
   }
 }
 
-const title = obtainedMod ? obtainedMod.title : (project.metadata.name ? project.metadata.name : project.metadata.mod_id);
-const description = project.metadata.description ? project.metadata.description : (obtainedMod ? obtainedMod.description : `${title} has no description.`);
+const description = project.metadata.description ? project.metadata.description : (obtainedMod ? obtainedMod.description : `${name} has no description.`);
 ---
 
 <div class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700">
@@ -76,7 +76,7 @@ const description = project.metadata.description ? project.metadata.description 
     <div>
       <h1 class="pb-1 text-lg font-bold text-black hover:text-gray-600 dark:text-white dark:hover:text-gray-300">
         <a href={getUrl()}>
-          {title}
+          {name}
         </a>  
     </h1>
       {showUserInfo && (<div> By:

@@ -74,11 +74,11 @@ export type EventSubmission = {
 export type Project = {
   id: string;
   metadata: {
-    type: string;
-    mod_id?: string;
-    name?: string;
-    description?: string;
-    source_url?: string;
+    type: "mod";
+    mod_id: string;
+    name: string;
+    description: string;
+    source_url: string;
   };
   team: { [user_id: string]: string };
   permissions: { [user_id: string]: string };
