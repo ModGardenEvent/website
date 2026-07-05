@@ -127,6 +127,7 @@ let description = userData.bio.description ? userData.bio.description : `${displ
               project={submission.project}
               submission={submission}
               events={projectToEventsMap.get(submission.project.id)}
+              name={submission.project.metadata.name ? submission.project.metadata.name : (submission.project.metadata.mod_id ? submission.project.metadata.mod_id : submission.project.id)}
             />
           ))
         }
