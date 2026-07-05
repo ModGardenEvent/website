@@ -249,6 +249,7 @@ export async function getModrinthModDataForEvent(genre_id: string, event_id: str
 export type SubmissionAndMod = {
     submission: EventSubmission;
     mod: Mod;
+    name: string;
 }
 
 export async function getSubmissions(genre_id: string, event_id: string, by: ByQuery = undefined) : Promise<SubmissionAndMod[]> {
@@ -258,8 +259,9 @@ export async function getSubmissions(genre_id: string, event_id: string, by: ByQ
   for (let i = 0; i < unsortedSubmissions.length; ++i) {
     const submission = unsortedSubmissions[i];
     const mod = modrinthProjects.find(mod => mod.id === (submission.platform.type === "modrinth" ? submission.platform.project_id : undefined));
-    submissions[i] = { submission: submission, mod: mod } as SubmissionAndMod;
+    const name = mod ? mod.title : (submission.project.metadata.name ? submission.project.metadata.name : (submission.project.metadata.mod_id ? submission.project.metadata.mod_id : submission.project.id));
+    submissions[i] = { submission: submission, mod: mod, name: name } as SubmissionAndMod;
   }
-  submissions.sort((a, b) => a.mod.title.localeCompare(b.mod.title))
+  submissions.sort((a, b) => a.name.localeCompare(b.name))
   return submissions;
 }

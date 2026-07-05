@@ -10,9 +10,10 @@ interface Props {
   mod?: Mod;
   events?: ModGardenEvent[];
   showUserInfo?: boolean;
+  name: string;
 }
 
-const { project, submission, mod, events, showUserInfo } = Astro.props;
+const { project, submission, mod, events, showUserInfo, name } = Astro.props;
 
 var obtainedMod = mod;
 if (!obtainedMod) {
