@@ -48,7 +48,7 @@ function getUrl(): string {
       case "modrinth":
         return `https://modrinth.com/project/${submission.platform.project_id}`;
       case "download_url":
-        return submission.platform.download_url;
+        return submission.project.metadata.source_url ? submission.project.metadata.source_url : submission.platform.download_url;
       default:
         return `#`;
   }
