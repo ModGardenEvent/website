@@ -51,6 +51,9 @@ function getUrl(): string {
         return `#`;
   }
 }
+
+const title = obtainedMod ? obtainedMod.title : (project.metadata.name ? project.metadata.name : project.metadata.mod_id);
+const description = project.metadata.description ? project.metadata.description : (obtainedMod ? obtainedMod.description : `${title} has no description.`);
 ---
 
 <div class="group inline-block rounded-lg bg-white text-black shadow-md hover:bg-gray-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700">
@@ -72,7 +75,7 @@ function getUrl(): string {
     <div>
       <h1 class="pb-1 text-lg font-bold text-black hover:text-gray-600 dark:text-white dark:hover:text-gray-300">
         <a href={getUrl()}>
-          {obtainedMod.title}
+          {title}
         </a>  
     </h1>
       {showUserInfo && (<div> By:
@@ -85,7 +88,7 @@ function getUrl(): string {
         }
       </div>)}
       <span>
-        {obtainedMod.description}
+        {description}
       </span>
     </div>
   </div>
